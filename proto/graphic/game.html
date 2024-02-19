@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proto-01</title>
+    <link href="./css/bootstrap.css" rel="stylesheet" />
+    <style>
+      .coinClass {
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-1 bg-light border w-100">
+          <p class="h1 bg-primary text-white text-center p-2" id="txtTitle">
+            Make Change - Minimum Coins
+          </p>
+          <img src="./img/coins.jpg" alt="coins" class="img-fluid w-100" />
+          <p class="text-black" id="txtDescription">
+            You have an unlimited number of quarters, dimes, nickels, and
+            pennies. Make change for the amount below using the fewest (minimum)
+            coins.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <!-- amount -->
+        <div class="col-1 bg-light border w-100">
+          <span class="text-center">
+            <p class="text-primary m-1" id="txtAmount"></p>
+          </span>
+        </div>
+      </div>
+      <div class="row text-center">
+        <!-- quarters, dimes, nickels, pennies -->
+        <!-- quarters -->
+        <div class="col-3 border text-center">
+          <p class="text-primary" id="txtMaxQ">&nbsp;</p>
+          <img src="./img/quarter.png" alt="quarter" class="img-fluid" />
+          <div class="d-flex justify-content-center m-3 align-bottom">
+            <input
+              type="text"
+              inputmode="numeric"
+              id="txtQ"
+              class="form-control coinClass"
+              style="width: 45px; height: 30px"
+            />
+          </div>
+        </div>
+        <!-- dimes -->
+        <div class="col-3 border text-center">
+          <p class="text-primary" id="txtMaxD">&nbsp;</p>
+          <img src="./img/dime.png" alt="dime" class="img-fluid" />
+          <div class="d-flex justify-content-center m-3 align-bottom">
+            <input
+              type="text"
+              inputmode="numeric"
+              id="txtD"
+              class="form-control coinClass"
+              style="width: 45px; height: 30px"
+            />
+          </div>
+        </div>
+        <!-- nickels -->
+        <div class="col-3 border text-center">
+          <p class="text-primary" id="txtMaxN">&nbsp;</p>
+          <img src="./img/nickel.png" alt="nickel" class="img-fluid" />
+          <div class="d-flex justify-content-center m-3 align-bottom">
+            <input
+              type="text"
+              inputmode="numeric"
+              id="txtN"
+              class="form-control coinClass"
+              style="width: 45px; height: 30px"
+            />
+          </div>
+        </div>
+        <!-- pennies -->
+        <div class="col-3 border text-center">
+          <p class="text-primary" id="txtMaxP">&nbsp;</p>
+          <img src="./img/penny.png" alt="penny" class="img-fluid" />
+          <div class="d-flex justify-content-center m-3 align-bottom">
+            <input
+              type="text"
+              inputmode="numeric"
+              id="txtP"
+              class="form-control coinClass"
+              style="width: 45px; height: 30px"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 bg-light border w-100 text-center">
+          <button class="btn btn-primary m-3" id="btnLeft">Clear</button>
+          <button class="btn btn-primary m-3" id="btnRight">Check</button>
+        </div>
+      </div>
+      <div class="row">
+        <!-- feedback -->
+        <div class="bg-primary min-vh-100">
+          <!-- alert-success or alert-warning -->
+          <div class="alert mt-1 ps-auto" role="alert" id="txtFeedback"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="js/change-min.js"></script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0"
+    />
+    <title>Make Change</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <!-- title -->
+        <div class="col-1 bg-light border w-100">
+          <p
+            class="h3 bg-primary text-white text-center p-2"
+            id="txtScoreTitle"
+          ></p>
+          <img src="./img/coins.jpg" alt="coins" class="img-fluid w-100" />
+        </div>
+      </div>
+      <div class="row">
+        <p class="text-black display-2 text-center" id="txtScoreRatio">
+          <!-- score -->
+        </p>
+      </div>
+      <div class="row">
+        <!-- feedback -->
+        <div
+          class="alert-success m-2 h2"
+          role="alert"
+          id="txtScoreFeedback"
+        ></div>
+      </div>
+      <div class="row">
+        <!-- home button -->
+        <div class="d-grid gap-1">
+          <a href="index.html" class="btn btn-primary m-3" id="btnHome">Home</a>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="js/types.js"></script>
+  <script type="text/javascript" src="js/score.js"></script>
+</html>

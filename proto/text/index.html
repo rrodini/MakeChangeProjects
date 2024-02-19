@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proto-01</title>
+    <link href="./css/bootstrap.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- <div class="header">
+        <p class="h1 bg-primary text-white text-center" id="txtTitle">
+          Make Change - Minimum Coins
+        </p>
+        <p class="text-black" id="txtDescription">
+          You have an unlimited number of quarters, dimes, nickels, and pennies.
+          Make change for the amount below using the fewest (minimum) coins.
+        </p>
+      </div> -->
+      <div class="row">
+        <p class="h1 bg-primary text-white text-center" id="txtTitle">
+          Make Change - Minimum Coins
+        </p>
+        <p class="text-black" id="txtDescription">
+          You have an unlimited number of quarters, dimes, nickels, and pennies.
+          Make change for the amount below using the fewest (minimum) coins.
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-1 bg-light border w-100">
+          <span class="text-center">
+            <p class="text-primary" id="txtAmount">Amount xx&cent;</p>
+          </span>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-3 bg-light border">
+          <p class="text-primary" id="txtMaxQ">qq</p>
+          <p class="h1">Q</p>
+          <div class="d-flex justify-content-center mb-3">
+            <input
+              type="text"
+              id="txtQ"
+              class="form-control"
+              style="width: 20px; height: 30px"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-3 bg-light border text-center">
+          <p class="text-primary" id="txtMaxD">dd</p>
+          <p class="h1">D</p>
+          <div class="d-flex justify-content-center mb-3">
+            <input
+              type="text"
+              id="txtD"
+              class="form-control"
+              style="width: 20px; height: 30px"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-3 bg-light border text-center">
+          <p class="text-primary" id="txtMaxN">nn</p>
+          <p class="h1">N</p>
+          <div class="d-flex justify-content-center mb-3">
+            <input
+              type="text"
+              id="txtN"
+              class="form-control"
+              style="width: 20px; height: 30px"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-3 bg-light border text-center">
+          <p class="text-primary" id="txtMaxP">pp</p>
+          <p class="h1">P</p>
+          <div class="d-flex justify-content-center mb-3">
+            <input
+              type="text"
+              id="txtP"
+              class="form-control"
+              style="width: 20px; height: 30px"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 bg-light border w-100 text-center">
+          <button class="btn btn-primary m-3" id="btnLeft">Clear</button>
+          <button class="btn btn-primary m-3" id="btnRight">Check</button>
+        </div>
+      </div>
+      <div class="footer">
+        <input
+          type="text"
+          id="txtFeedback"
+          class="form-control text-muted w-100"
+          value="Feedback"
+        />
+      </div>
+    </div>
+  </body>
+</html>
