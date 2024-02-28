@@ -235,7 +235,7 @@ function getCoinValues() {
             else if (id === 'txtP') {
                 p = parseInt(valStr);
             }
-            console.log("id: ".concat(id, " valStr: ").concat(valStr));
+//            console.log("id: ".concat(id, " valStr: ").concat(valStr));
         }
     });
     return new Coins(q, d, n, p);
@@ -272,7 +272,7 @@ function retryProblem() {
     setButtons('Solution', false, 'Retry');
     setFocusQ();
     tryCount++;
-    showProblem();
+ //   showProblem();
 }
 // User clicked "Check" so mark the problem.
 function markProblem() {
@@ -308,7 +308,6 @@ function markProblem() {
         else {
             //  Too many retries. Force user to click "Next".
             setFeedback(ProbMark.INCORRECT, getSolutionString() + ". Sorry, got to move on.");
-            setButtons('Clear', true, 'Next');
             if (testProblemCount()) {
                 setButtons('Clear', true, 'Next');
             }
@@ -324,13 +323,17 @@ function getSolutionString() {
     var solnString = "Solution ".concat(solnCoins.toString());
     return solnString;
 }
-// Show the solution
+// Show the solution. Same as INCORRECT.
 function showSolution() {
     probState = ProbState.SOLUTION;
     logProbState(probState);
     setFeedback(ProbMark.INCORRECT, getSolutionString());
-    // User forced to click 'Next'
-    setButtons('Clear', true, 'Next');
+    if (testProblemCount()) {
+        setButtons('Clear', true, 'Next');
+    }
+    else {
+        setButtons('Clear', true, 'Game Over');
+    }
 }
 // Game over if user reached problem count.
 function testProblemCount() {
