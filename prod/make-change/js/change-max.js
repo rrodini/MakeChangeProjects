@@ -8,14 +8,15 @@ var gameCoinsMax = {
     description: "You have a limited number of quarters, dimes, nickels, and " +
         "pennies. Make change for the amount below using the most (maximum)" +
         " coins. The change must be EXACT. If it can't be done, enter zeros.",
+    type: GameType.MAX_COINS,
     probMax: 5,
     tryMax: 3,
     genProblem: function () {
         var amount = Math.floor(Math.random() * 99) + 1;
-        var maxQ = Math.min(Math.floor(Math.random() * 3) + 1, Math.floor(amount / 25));
-        var maxD = Math.min(Math.floor(Math.random() * 9) + 1, Math.floor(amount / 10));
-        var maxN = Math.min(Math.floor(Math.random() * 19) + 1, Math.floor(amount / 5));
-        var maxP = Math.min(Math.floor(Math.random() * 24) + 1, Math.floor(25));
+        var maxQ = Math.min(Math.floor(Math.random() * 2) + 1, Math.floor(amount / 25));
+        var maxD = Math.min(Math.floor(Math.random() * 5) + 1, Math.floor(amount / 10));
+        var maxN = Math.min(Math.floor(Math.random() * 10) + 1, Math.floor(amount / 5));
+        var maxP = Math.min(Math.floor(Math.random() * 20) + 1, Math.floor(25));
         var maxCoins = new Coins(maxQ, maxD, maxN, maxP);
         currentProblem = { amount: amount, maxCoins: maxCoins };
         // Now generate solutions

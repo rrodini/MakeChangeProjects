@@ -9,13 +9,13 @@ var txtScoreFeedback = document.getElementById("txtScoreFeedback");
 var scoreTitle = "";
 switch (scoreParamGame) {
     case GameType[GameType.MIN_COINS]:
-        scoreTitle = "Make Change - Minimum Coins";
+        scoreTitle = "Game Over - Minimum Coins";
         break;
     case GameType[GameType.FINITE_COINS]:
-        scoreTitle = "Make Change - Finite Coins";
+        scoreTitle = "Game Over - Finite Coins";
         break;
     case GameType[GameType.MAX_COINS]:
-        scoreTitle = "Make Change - Maximum Coins";
+        scoreTitle = "Game Over - Maximum Coins";
         break;
 }
 var minCoinsFeedback = [
@@ -38,7 +38,7 @@ var maxCoinsFeedback = [
     // 5 - 5
     "Perfect! You have mastered this game.",
     // 3 - 4
-    "Good. These problems are harder, aren't they?",
+    "Good. These problems are hard, aren't they?",
     // 0 - 2
     "This level is pretty hard, isn't it?",
 ];

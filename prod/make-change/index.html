@@ -13,12 +13,12 @@
     <div class="container">
       <div class="row">
         <div class="col-1 bg-light border w-100">
-          <p class="h3 bg-primary text-white text-center p-2">
+          <p class="h3 bg-primary text-white text-center p-2" role="heading">
             <!-- title -->
             Make Change
           </p>
-          <img src="./img/coins.jpg" alt="coins" class="img-fluid w-100" />
-          <p class="text-black">
+          <img src="./img/coins.jpg" alt="assortment of U.S. coins" class="img-fluid w-100" />
+          <p class="text-black" role="main">
             <!-- description -->
             There was a time when people carried change in their
             pockets and purses to make change. Now it's a game.
@@ -28,10 +28,19 @@
       </div>
       <div class="row">
         <div class="d-grid gap-1">
-          <a href="game.html?game=MIN_COINS" class="btn btn-primary m-3" id="btnMinimum">Easy (Minimum Coins)</a>
-          <a href="game.html?game=FINITE_COINS" class="btn btn-primary m-3" id="btnFinite">Medium (Finite Coins)</a>
-          <a href="game.html?game=MAX_COINS" class="btn btn-primary m-3" id="btnMaximum">Hard (Maximum Coins)</a>
+          <a href="game.html?game=MIN_COINS" class="btn btn-primary m-3" id="btnMinimum" role="button">Easy (Minimum Coins)</a>
+          <a href="game.html?game=FINITE_COINS" class="btn btn-primary m-3" id="btnFinite" role="button">Medium (Finite Coins)</a>
+          <a href="game.html?game=MAX_COINS" class="btn btn-primary m-3" id="btnMaximum" role="button">Hard (Maximum Coins)</a>
         </div>
+        <div class="row">
+          <!-- version | privacy -->
+          <div class="col-1 bg-light border w-100 text-center">
+            <span class="text-center">
+              <!-- <span class="text-black d-none" id="txtVersion">Version 1.0.1 &nbsp;&nbsp;</span> -->
+              <a href="https://www.primesrus.com/privacy.html" class="">Privacy</a>
+            </span>
+          </div>
+        </div>  
       </div>
     </body>
   </html>

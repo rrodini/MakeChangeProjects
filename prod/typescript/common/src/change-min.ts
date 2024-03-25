@@ -6,6 +6,7 @@ const gameCoinsMin: GameConfig = {
   description: "You have an unlimited number of quarters, dimes, nickels, and " +
     "pennies. Make change for the amount below using the fewest (minimum)" +
     " coins.",
+  type: GameType.MIN_COINS,
   probMax: 5,
   tryMax: 3,
   genProblem: function (): Problem {

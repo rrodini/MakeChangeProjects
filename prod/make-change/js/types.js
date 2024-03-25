@@ -13,7 +13,7 @@ var ProbMark;
     ProbMark[ProbMark["INCORRECT"] = 2] = "INCORRECT";
 })(ProbMark || (ProbMark = {}));
 // Globals
-var gameType;
+var currentGameType;
 var currentProblem;
 var solnCoins;
 var currentGame;

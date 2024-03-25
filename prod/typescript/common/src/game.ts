@@ -17,6 +17,7 @@ switch (gameParamGame) {
     currentGame = gameCoinsMax;
     break;
 }
+currentGameType = currentGame.type;
 
 enum GameState {
   INIT,    // Initializing for type of game
@@ -53,6 +54,7 @@ let tryCount: number = 0;
 
 const txtTitle = document.getElementById("txtTitle") as HTMLInputElement;
 const txtDescription = document.getElementById("txtDescription") as HTMLInputElement;
+const txtNoOfCoins = document.getElementById("txtNoOfCoins") as HTMLInputElement;
 const txtAmount = document.getElementById("txtAmount") as HTMLInputElement;
 const txtQ = document.getElementById("txtQ") as HTMLInputElement;
 const txtD = document.getElementById("txtD") as HTMLInputElement;
@@ -60,6 +62,7 @@ const txtN = document.getElementById("txtN") as HTMLInputElement;
 const txtP = document.getElementById("txtP") as HTMLInputElement;
 const btnLeft = document.getElementById("btnLeft") as HTMLButtonElement;
 const btnRight = document.getElementById("btnRight") as HTMLButtonElement;
+const txtProbCount = document.getElementById("txtProbCount") as HTMLInputElement;
 const txtFeedback = document.getElementById("txtFeedback") as HTMLInputElement;
 
 txtQ?.addEventListener("change", coinValueChange);
@@ -84,6 +87,11 @@ nextProblem();
 function setGameInfo() {
   txtTitle.innerHTML = currentGame.title;
   txtDescription.innerHTML = currentGame.description;
+  if (currentGameType == GameType.MIN_COINS) {
+    txtNoOfCoins.style.visibility = "hidden";
+  } else {
+    txtNoOfCoins.style.visibility = "visible";
+  }
   setFocusQ();
 }
 
@@ -138,8 +146,10 @@ function setMaxValues() {
     let ele: HTMLInputElement = document.getElementById(key) as HTMLInputElement;
     if (val !== Number.MAX_SAFE_INTEGER) {
       ele.innerHTML = val;
+      ele.setAttribute('aria-valuenow', val);
     } else {
       ele.innerHTML = "";
+      ele.setAttribute('aria-valuetext', 'unlimited');
     }
   })
 }
@@ -157,11 +167,14 @@ function coinValueChange(this: HTMLDataElement, ev: Event): void {
   if (!checkCoinValue(valStr, maxVal)) {
     // change the border to indicate error (don't remove coinClass)
     this.classList.add('border-danger');
+    this.setAttribute('aria-invalid', 'true');
     // can't click Check
     btnRight.disabled = true;
   } else {
     // change border back, just in case.
     this.classList.remove('border-danger');
+    this.setAttribute('aria-invalid', 'false');
+    this.setAttribute('aria-valuenow', valStr);
     // can click Check
     btnRight.disabled = false;
   }
@@ -210,12 +223,16 @@ function rightButtonClick(this: HTMLButtonElement, ev: Event): void {
 function clearCoins(): void {
   txtQ.value = "0";
   txtQ.classList.remove('border-danger');
-  txtN.value = "0";
-  txtN.classList.remove('border-danger');
+  txtQ.setAttribute('aria-invalid', 'false');
   txtD.value = "0";
   txtD.classList.remove('border-danger');
+  txtD.setAttribute('aria-invalid', 'false');
+  txtN.value = "0";
+  txtN.classList.remove('border-danger');
+  txtN.setAttribute('aria-invalid', 'false');
   txtP.value = "0";
   txtP.classList.remove('border-danger');
+  txtP.setAttribute('aria-invalid', 'false');
 }
 
 function getCoinValues(): Coins {
@@ -258,11 +275,13 @@ function nextProblem() {
   probCount++;
   const problem: Problem = currentGame.genProblem();
   txtAmount.innerHTML = `Amount ${problem.amount}&cent;`;
+  txtAmount.setAttribute('aria-valuenow', `${problem.amount}`);
   maxValMap.set('txtMaxQ', problem.maxCoins.getQ());
   maxValMap.set('txtMaxD', problem.maxCoins.getD());
   maxValMap.set('txtMaxN', problem.maxCoins.getN());
   maxValMap.set('txtMaxP', problem.maxCoins.getP());
   setMaxValues();
+  txtProbCount.innerHTML = `${probCount} of ${currentGame.probMax}`
   setFeedback(ProbMark.NONE, "");
   clearCoins();
   setFocusQ();
@@ -332,8 +351,12 @@ function showSolution() {
   probState = ProbState.SOLUTION;
   logProbState(probState);
   setFeedback(ProbMark.INCORRECT, getSolutionString());
-  // User forced to click 'Next'
-  setButtons('Clear', true, 'Next');
+  // User forced to click 'Next' or maybe 'Game Over'
+  if (testProblemCount()) {
+    setButtons('Clear', true, 'Next');
+  } else {
+    setButtons('Clear', true, 'Game Over');
+  }
 }
 // Game over if user reached problem count.
 function testProblemCount(): boolean {

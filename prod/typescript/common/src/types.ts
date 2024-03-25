@@ -9,6 +9,7 @@ enum ProbMark {
 interface GameConfig {
   title: string,
   description: string,
+  type: GameType,
   probMax: number,
   tryMax: number,
   // functions - Implementation should save problem after generation.
@@ -27,7 +28,7 @@ interface ProbFeedback {
   feedback: string,
 }
 // Globals
-let gameType: GameType;
+let currentGameType: GameType;
 let currentProblem: Problem;
 let solnCoins: Coins;
 let currentGame: GameConfig;

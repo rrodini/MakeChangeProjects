@@ -9,14 +9,15 @@ const gameCoinsFinite: GameConfig = {
   description: "You have a limited number of quarters, dimes, nickels, and " +
     "pennies. Make change for the amount using the" +
     " coins. The change must be EXACT. If it can't be done, enter zeros.",
+  type: GameType.FINITE_COINS,
   probMax: 5,
   tryMax: 3,
   genProblem: function (): Problem {
     const amount = Math.floor(Math.random() * 99) + 1;
-    const maxQ = Math.min(Math.floor(Math.random() * 3) + 1, Math.floor(amount / 25));
-    const maxD = Math.min(Math.floor(Math.random() * 9) + 1, Math.floor(amount / 10));
-    const maxN = Math.min(Math.floor(Math.random() * 19) + 1, Math.floor(amount / 5));
-    const maxP = Math.min(Math.floor(Math.random() * 24) + 1, Math.floor(25));
+    const maxQ = Math.min(Math.floor(Math.random() * 2 + 1), Math.floor(amount / 25));
+    const maxD = Math.min(Math.floor(Math.random() * 5 + 1), Math.floor(amount / 10));
+    const maxN = Math.min(Math.floor(Math.random() * 10 + 1), Math.floor(amount / 5));
+    const maxP = Math.min(Math.floor(Math.random() * 20 + 1), Math.floor(25));
     const maxCoins = new Coins(maxQ, maxD, maxN, maxP);
     currentProblem = { amount: amount, maxCoins: maxCoins };
     // Now generate solutions

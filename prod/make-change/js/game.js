@@ -16,6 +16,7 @@ switch (gameParamGame) {
         currentGame = gameCoinsMax;
         break;
 }
+currentGameType = currentGame.type;
 var GameState;
 (function (GameState) {
     GameState[GameState["INIT"] = 0] = "INIT";
@@ -48,6 +49,7 @@ var correctCount = 0;
 var tryCount = 0;
 var txtTitle = document.getElementById("txtTitle");
 var txtDescription = document.getElementById("txtDescription");
+var txtNoOfCoins = document.getElementById("txtNoOfCoins");
 var txtAmount = document.getElementById("txtAmount");
 var txtQ = document.getElementById("txtQ");
 var txtD = document.getElementById("txtD");
@@ -55,6 +57,7 @@ var txtN = document.getElementById("txtN");
 var txtP = document.getElementById("txtP");
 var btnLeft = document.getElementById("btnLeft");
 var btnRight = document.getElementById("btnRight");
+var txtProbCount = document.getElementById("txtProbCount");
 var txtFeedback = document.getElementById("txtFeedback");
 txtQ === null || txtQ === void 0 ? void 0 : txtQ.addEventListener("change", coinValueChange);
 txtD === null || txtD === void 0 ? void 0 : txtD.addEventListener("change", coinValueChange);
@@ -76,6 +79,12 @@ nextProblem();
 function setGameInfo() {
     txtTitle.innerHTML = currentGame.title;
     txtDescription.innerHTML = currentGame.description;
+    if (currentGameType == GameType.MIN_COINS) {
+        txtNoOfCoins.style.visibility = "hidden";
+    }
+    else {
+        txtNoOfCoins.style.visibility = "visible";
+    }
     setFocusQ();
 }
 function setFocusQ() {
@@ -126,9 +135,11 @@ function setMaxValues() {
         var ele = document.getElementById(key);
         if (val !== Number.MAX_SAFE_INTEGER) {
             ele.innerHTML = val;
+            ele.setAttribute('aria-valuenow', val);
         }
         else {
             ele.innerHTML = "";
+            ele.setAttribute('aria-valuetext', 'unlimited');
         }
     });
 }
@@ -145,12 +156,15 @@ function coinValueChange(ev) {
     if (!checkCoinValue(valStr, maxVal)) {
         // change the border to indicate error (don't remove coinClass)
         this.classList.add('border-danger');
+        this.setAttribute('aria-invalid', 'true');
         // can't click Check
         btnRight.disabled = true;
     }
     else {
         // change border back, just in case.
         this.classList.remove('border-danger');
+        this.setAttribute('aria-invalid', 'false');
+        this.setAttribute('aria-valuenow', valStr);
         // can click Check
         btnRight.disabled = false;
     }
@@ -201,12 +215,16 @@ function rightButtonClick(ev) {
 function clearCoins() {
     txtQ.value = "0";
     txtQ.classList.remove('border-danger');
-    txtN.value = "0";
-    txtN.classList.remove('border-danger');
+    txtQ.setAttribute('aria-invalid', 'false');
     txtD.value = "0";
     txtD.classList.remove('border-danger');
+    txtD.setAttribute('aria-invalid', 'false');
+    txtN.value = "0";
+    txtN.classList.remove('border-danger');
+    txtN.setAttribute('aria-invalid', 'false');
     txtP.value = "0";
     txtP.classList.remove('border-danger');
+    txtP.setAttribute('aria-invalid', 'false');
 }
 function getCoinValues() {
     var coinList = document.querySelectorAll('.coinClass');
@@ -235,7 +253,7 @@ function getCoinValues() {
             else if (id === 'txtP') {
                 p = parseInt(valStr);
             }
-//            console.log("id: ".concat(id, " valStr: ").concat(valStr));
+            console.log("id: ".concat(id, " valStr: ").concat(valStr));
         }
     });
     return new Coins(q, d, n, p);
@@ -251,11 +269,13 @@ function nextProblem() {
     probCount++;
     var problem = currentGame.genProblem();
     txtAmount.innerHTML = "Amount ".concat(problem.amount, "&cent;");
+    txtAmount.setAttribute('aria-valuenow', "".concat(problem.amount));
     maxValMap.set('txtMaxQ', problem.maxCoins.getQ());
     maxValMap.set('txtMaxD', problem.maxCoins.getD());
     maxValMap.set('txtMaxN', problem.maxCoins.getN());
     maxValMap.set('txtMaxP', problem.maxCoins.getP());
     setMaxValues();
+    txtProbCount.innerHTML = "".concat(probCount, " of ").concat(currentGame.probMax);
     setFeedback(ProbMark.NONE, "");
     clearCoins();
     setFocusQ();
@@ -272,7 +292,7 @@ function retryProblem() {
     setButtons('Solution', false, 'Retry');
     setFocusQ();
     tryCount++;
- //   showProblem();
+    showProblem();
 }
 // User clicked "Check" so mark the problem.
 function markProblem() {
@@ -308,6 +328,7 @@ function markProblem() {
         else {
             //  Too many retries. Force user to click "Next".
             setFeedback(ProbMark.INCORRECT, getSolutionString() + ". Sorry, got to move on.");
+            setButtons('Clear', true, 'Next');
             if (testProblemCount()) {
                 setButtons('Clear', true, 'Next');
             }
@@ -323,11 +344,12 @@ function getSolutionString() {
     var solnString = "Solution ".concat(solnCoins.toString());
     return solnString;
 }
-// Show the solution. Same as INCORRECT.
+// Show the solution
 function showSolution() {
     probState = ProbState.SOLUTION;
     logProbState(probState);
     setFeedback(ProbMark.INCORRECT, getSolutionString());
+    // User forced to click 'Next' or maybe 'Game Over'
     if (testProblemCount()) {
         setButtons('Clear', true, 'Next');
     }
