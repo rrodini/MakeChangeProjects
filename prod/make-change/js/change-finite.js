@@ -12,7 +12,11 @@ var gameCoinsFinite = {
     probMax: 5,
     tryMax: 3,
     genProblem: function () {
-        var amount = Math.floor(Math.random() * 99) + 1;
+        var minAmount = 60;
+        amount = 0;
+        while (amount < minAmount) {
+            amount = Math.floor(Math.random() * 99) + 1;
+        }
         var maxQ = Math.min(Math.floor(Math.random() * 2 + 1), Math.floor(amount / 25));
         var maxD = Math.min(Math.floor(Math.random() * 5 + 1), Math.floor(amount / 10));
         var maxN = Math.min(Math.floor(Math.random() * 10 + 1), Math.floor(amount / 5));

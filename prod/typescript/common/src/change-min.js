@@ -1,4 +1,3 @@
-"use strict";
 /*
  change-min.ts - Logic for the minimal coins game.
 */

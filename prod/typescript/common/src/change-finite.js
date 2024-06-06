@@ -1,14 +1,13 @@
-"use strict";
 /*
- change-max.ts - Logic for the maximal coins game.
+ change-finite.ts - Logic for the finite coins game.
 */
-var maxSolns = [];
-var gameCoinsMax = {
-    title: "Make Change - Maximum Coins",
+var finiteSolns = [];
+var gameCoinsFinite = {
+    title: "Make Change - Finite Coins",
     description: "You have a limited number of quarters, dimes, nickels, and " +
-        "pennies. Make change for the amount below using the most (maximum)" +
+        "pennies. Make change for the amount using the" +
         " coins. The change must be EXACT. If it can't be done, enter zeros.",
-    type: GameType.MAX_COINS,
+    type: GameType.FINITE_COINS,
     probMax: 5,
     tryMax: 3,
     genProblem: function () {
@@ -17,14 +16,14 @@ var gameCoinsMax = {
         while (amount < minAmount) {
             amount = Math.floor(Math.random() * 99) + 1;
         }
-        var maxQ = Math.min(Math.floor(Math.random() * 2) + 1, Math.floor(amount / 25));
-        var maxD = Math.min(Math.floor(Math.random() * 5) + 1, Math.floor(amount / 10));
-        var maxN = Math.min(Math.floor(Math.random() * 10) + 1, Math.floor(amount / 5));
-        var maxP = Math.min(Math.floor(Math.random() * 20) + 1, Math.floor(25));
+        var maxQ = Math.min(Math.floor(Math.random() * 2 + 1), Math.floor(amount / 25));
+        var maxD = Math.min(Math.floor(Math.random() * 5 + 1), Math.floor(amount / 10));
+        var maxN = Math.min(Math.floor(Math.random() * 10 + 1), Math.floor(amount / 5));
+        var maxP = Math.min(Math.floor(Math.random() * 20 + 1), Math.floor(25));
         var maxCoins = new Coins(maxQ, maxD, maxN, maxP);
         currentProblem = { amount: amount, maxCoins: maxCoins };
         // Now generate solutions
-        maxSolns = [];
+        finiteSolns = [];
         for (var amt = 1; amt <= amount; amt++) {
             var q = void 0;
             for (q = maxQ; q >= 0; q--) {
@@ -36,26 +35,26 @@ var gameCoinsMax = {
                         for (p = maxP; p >= 0; p--) {
                             var testCoins = new Coins(q, d, n, p);
                             if (testCoins.getValue() === amount) {
-                                maxSolns.push(testCoins);
+                                finiteSolns.push(testCoins);
                             }
                         }
                     }
                 }
             }
         }
-        // now sort allSolns based on # coins
-        maxSolns.sort(function (a, b) {
+        // now sort finiteSolns based on # coins
+        finiteSolns.sort(function (a, b) {
             return a.getCount() - b.getCount();
         });
         // TEMP
-        //allSolns.forEach(soln => { console.log(soln.toString()) });
+        //finiteSolns.forEach(soln => { console.log(soln.toString()) });
         return currentProblem;
     },
     markProblem: function (userCoins) {
         var markFeedback = { mark: ProbMark.INCORRECT, feedback: "TBD" };
         if (userCoins.equals(Coins.zeroCoins)) {
             // Is there no solution?
-            if (maxSolns.length === 0) {
+            if (finiteSolns.length === 0) {
                 markFeedback = { mark: ProbMark.CORRECT, feedback: "Correct." };
             }
             else {
@@ -68,22 +67,16 @@ var gameCoinsMax = {
                 markFeedback = { mark: ProbMark.INCORRECT, feedback: "Coins don't sum to Amount." };
             }
             else {
-                // Are the user coins maximal?
-                var solnCount = maxSolns[maxSolns.length - 1].getCount();
-                if (solnCount === userCoins.getCount()) {
-                    markFeedback = { mark: ProbMark.CORRECT, feedback: "Correct." };
-                }
-                else {
-                    markFeedback = { mark: ProbMark.INCORRECT, feedback: "Number of coins not maximum." };
-                }
+                markFeedback = { mark: ProbMark.CORRECT, feedback: "Correct." };
             }
         }
         return markFeedback;
     },
     getSolution: function () {
         solnCoins = Coins.zeroCoins;
-        if (maxSolns.length > 0) {
-            solnCoins = maxSolns[maxSolns.length - 1];
+        if (finiteSolns.length > 0) {
+            // Any soln can be used. For now, show maximum coins.
+            solnCoins = finiteSolns[finiteSolns.length - 1];
         }
         return solnCoins;
     }

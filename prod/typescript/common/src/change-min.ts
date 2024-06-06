@@ -10,7 +10,11 @@ const gameCoinsMin: GameConfig = {
   probMax: 5,
   tryMax: 3,
   genProblem: function (): Problem {
-    const amount = Math.floor(Math.random() * 99) + 1;
+    const minAmount = 60;
+    amount = 0;
+    while (amount < minAmount) {
+      amount = Math.floor(Math.random() * 99) + 1;
+    }
     const maxCoins = new Coins(Number.MAX_SAFE_INTEGER,
       Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
     currentProblem = { amount: amount, maxCoins: maxCoins };

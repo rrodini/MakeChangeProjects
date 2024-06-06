@@ -1,4 +1,3 @@
-"use strict";
 /*
  change-max.ts - Logic for the maximal coins game.
 */
