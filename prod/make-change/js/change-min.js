@@ -11,7 +11,7 @@ var gameCoinsMin = {
     probMax: 5,
     tryMax: 3,
     genProblem: function () {
-        var minAmount = 60;
+        var minAmount = 40;
         amount = 0;
         while (amount < minAmount) {
             amount = Math.floor(Math.random() * 99) + 1;
