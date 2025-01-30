@@ -6,9 +6,9 @@ let maxSolns: Coins[] = []
 
 const gameCoinsMax: GameConfig = {
   title: "Make Change - Maximum Coins",
-  description: "You have a limited number of quarters, dimes, nickels, and " +
-    "pennies. Make change for the amount below using the most (maximum)" +
-    " coins. The change must be EXACT. If it can't be done, enter zeros.",
+  description: "You have a <b>limited</b> number of quarters, dimes, nickels, and " +
+    "pennies. Make change for the <b>amount</b> below using the most <b>(maximum)</b>" +
+    " coins. The change must be <b>EXACT</b>. If it can't be done, enter zeros.",
   type: GameType.MAX_COINS,
   probMax: 5,
   tryMax: 3,
@@ -84,5 +84,19 @@ const gameCoinsMax: GameConfig = {
       solnCoins = maxSolns[maxSolns.length - 1];
     }
     return solnCoins;
+  },
+  // Help functions
+  genExample: function (kind: ProbMark): Example {
+    // get values from an array of problems in the future.
+    amount = 41;
+    const maxQ = 0;
+    const maxD = 0;
+    const maxN = 0;
+    const maxP = 0;
+    const maxCoins = new Coins(maxQ, maxD, maxN, maxP);
+    const currentProblem = { amount: amount, maxCoins: maxCoins };
+    const exampleCoins = new Coins(0, 0, 0, 0);
+    return { problem: currentProblem, userCoins: exampleCoins };
   }
+
 }  

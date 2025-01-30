@@ -1,17 +1,4 @@
-/* McBasicsCol (Make Change Basics Column) is an extremely simple
- * web component generator used to generate bootstrap compatible
- * columns within a bootstrap grid.
- * 
- * Tag: <mc-basics-col>
- * Attributes/Values:
- * col-type: "addend"|"sum"|"empty"
- * img-caption: text
- * img-url: relative url
- * co]-op: "+" | "="
- * col-sum: integer
- * 
- * Note: There is no error checking.
- */
+// Make a cell (1 or 2 column) for the basics help page.
 class McBasicsCol extends HTMLElement {
 
   constructor() {
@@ -82,7 +69,7 @@ class McBasicsCol extends HTMLElement {
         break;
     }
 
-    //shadow.append()
+    //shadow.append() ???
   }
 }
 // Define new element

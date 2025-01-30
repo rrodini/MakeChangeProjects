@@ -5,9 +5,9 @@
 var finiteSolns = [];
 var gameCoinsFinite = {
     title: "Make Change - Finite Coins",
-    description: "You have a limited number of quarters, dimes, nickels, and " +
-        "pennies. Make change for the amount using the" +
-        " coins. The change must be EXACT. If it can't be done, enter zeros.",
+    description: "You have a <b>limited</b> number of quarters, dimes, nickels, and " +
+        "pennies. Make change for the <b>amount</b> using the" +
+        " coins. The change must be <b>EXACT</b>. If it can't be done, enter zeros.",
     type: GameType.FINITE_COINS,
     probMax: 5,
     tryMax: 3,
@@ -80,5 +80,18 @@ var gameCoinsFinite = {
             solnCoins = finiteSolns[finiteSolns.length - 1];
         }
         return solnCoins;
+    },
+    // Help functions
+    genExample: function (kind) {
+        // get values from an array of problems in the future.
+        amount = 41;
+        var maxQ = 0;
+        var maxD = 0;
+        var maxN = 0;
+        var maxP = 0;
+        var maxCoins = new Coins(maxQ, maxD, maxN, maxP);
+        currentProblem = { amount: amount, maxCoins: maxCoins };
+        var exampleCoins = new Coins(0, 0, 0, 0);
+        return { problem: currentProblem, userCoins: exampleCoins };
     }
 };

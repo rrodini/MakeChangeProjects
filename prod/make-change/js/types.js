@@ -12,8 +12,9 @@ var ProbMark;
     ProbMark[ProbMark["CORRECT"] = 1] = "CORRECT";
     ProbMark[ProbMark["INCORRECT"] = 2] = "INCORRECT";
 })(ProbMark || (ProbMark = {}));
+// moved to game-common.ts
 // Globals
-var currentGameType;
-var currentProblem;
-var solnCoins;
-var currentGame;
+// let currentGameType: GameType;
+// let currentProblem: Problem;
+// let solnCoins: Coins;
+// let currentGame: GameConfig;
