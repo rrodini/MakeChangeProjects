@@ -7,6 +7,7 @@ class Coins {
   d: number;
   n: number;
   p: number;
+  coinsArray: number[];
 
   static zeroCoins: Coins = new Coins(0, 0, 0, 0);
 
@@ -15,11 +16,14 @@ class Coins {
     this.d = d;
     this.n = n;
     this.p = p;
+    // By convention order from high value to low value.
+    this.coinsArray = [q, d, n, p];
   }
   public getQ(): number { return this.q; }
   public getD(): number { return this.d; }
   public getN(): number { return this.n; }
   public getP(): number { return this.p; }
+  public getCoinsArray(): number[] { return this.coinsArray };
   /*
   getCount returns the number of coins (not their value).
   */
@@ -39,11 +43,17 @@ class Coins {
     return `[Q: ${this.q}, D: ${this.d}, N: ${this.n}, P: ${this.p}]`
   }
   /*
-  equals tests two Coins objects for value equality.
+  equals tests two Coins objects for equality.
   */
   public equals(coins: Coins): boolean {
     return this.q === coins.q && this.d === coins.d &&
       this.n === coins.n && this.p === coins.p;
+  }
+  /*
+  getValueString returns a string representation of Coins value calulation
+  */
+  public getValueString(): string {
+    return `${this.q.toString()}*25 + ${this.d.toString()}*10 + ${this.n.toString()}*5 + ${this.p.toString()}`;
   }
   /*
   compareTo (used for sorting)

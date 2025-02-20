@@ -12,19 +12,17 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-10 bg-light border">
+        <div class="col-10 bg-light border m-0">
           <p class="h3 bg-primary text-white text-center p-1" role="heading">
             <!-- title -->
             Make Change
           </p>
         </div>
         <div class="col-2">
-            <!-- <p class="h3 bg-primary text-white text-center p-1">
-              Help
-            </p> -->
-            <a href="basics.html" class="btn btn-primary m-0" id="btnHelp" role="button">Help</a>
-          </div>
-          <div class="row">
+            <a href="basics.html" class="btn btn-primary btn-sm" id="btnHelp" role="button">Help</a>
+        </div>
+      </div>
+      <div class="row">
           <img src="./img/coins.jpg" alt="assortment of U.S. coins" class="img-fluid w-100" />
           <p class="text-black" role="main">
             <!-- description -->
@@ -32,15 +30,42 @@
             pockets and purses to make change. Now it's a game.
             Pick a version and try it.
           </p>
+      </div>
+      <!-- <div class="row">
+        <div class="d-grid gap-2">
+          <a href="game.html?gameType=MIN_COINS&gameMode=PLAY" class="btn btn-primary m-3" id="btnMinimum" role="button">Easy (Minimum Coins)</a>
+          <a href="game.html?gameType=FINITE_COINS&gameMode=PLAY" class="btn btn-primary m-3" id="btnFinite" role="button">Medium (Finite Coins)</a>
+          <a href="game.html?gameType=MAX_COINS&gameMode=PLAY" class="btn btn-primary m-3" id="btnMaximum" role="button">Hard (Maximum Coins)</a>
+        </div>
+      </div> -->
+      <!-- Easy Game / Help -->
+      <div class="row">
+        <div class="col-9">
+          <a href="game.html?gameType=MIN_COINS&gameMode=PLAY" class="btn btn-primary m-1" id="btnMinGame" role="button">Easy (Minimum Coins)</a>
+        </div>
+        <div class="col-3">
+          <a href="game.html?gameType=MIN_COINS&gameMode=HELP" class="btn btn-primary m-1" id="btnMinHelp" role="button">Help</a>
+        </div>
+      </div>
+      <!-- Medium Game / Help -->
+      <div class="row">
+        <div class="col-9">
+          <a href="game.html?gameType=FINITE_COINS&gameMode=PLAY" class="btn btn-primary m-1" id="btnFiniteGame" role="button">Medium (Finite Coins)</a>
+        </div>
+        <div class="col-3">
+          <a href="game.html?gameType=FINITE_COINS&gameMode=HELP" class="btn btn-primary m-1" id="btnFiniteHelp" role="button">Help</a>
+        </div>
+      </div>
+      <!-- Hard Game / Help -->
+      <div class="row">
+        <div class="col-9">
+          <a href="game.html?gameType=MAX_COINS&gameMode=PLAY" class="btn btn-primary m-1" id="btnMaxGame" role="button">Hard (Maximum Coins)</a>
+        </div>
+        <div class="col-3">
+          <a href="game.html?gameType=MAX_COINS&gameMode=HELP" class="btn btn-primary m-1" id="btnMaxHelp" role="button">Help</a>
         </div>
       </div>
       <div class="row">
-        <div class="d-grid gap-1">
-          <a href="game-play.html?game=MIN_COINS" class="btn btn-primary m-3" id="btnMinimum" role="button">Easy (Minimum Coins)</a>
-          <a href="game-play.html?game=FINITE_COINS" class="btn btn-primary m-3" id="btnFinite" role="button">Medium (Finite Coins)</a>
-          <a href="game-play.html?game=MAX_COINS" class="btn btn-primary m-3" id="btnMaximum" role="button">Hard (Maximum Coins)</a>
-        </div>
-        <div class="row">
           <!-- version | privacy -->
           <div class="col-1 bg-light border w-100 text-center">
             <span class="text-center">
@@ -48,7 +73,6 @@
               <a href="https://www.primesrus.com/privacy.html" class="">Privacy</a>
             </span>
           </div>
-        </div>  
-      </div>
+      </div>  
     </body>
   </html>

@@ -1,20 +1,19 @@
 "use strict";
 /*
- game-common.ts - Everything that is common between game-play and game-help.
+ game-common.ts - Everything that is common between game-play.ts and game-help.ts.
  Types, globals, functions, etc.
  */
 // Globals
 var currentGameType;
+var currentGameMode;
 var currentProblem;
 var solnCoins;
-var currentGame;
+var currentGame = gameCoinsMin; // make typescript happy
 var queryParams = new URLSearchParams(window.location.search);
-var gameParamGame = queryParams.get("game");
-var GameKind;
-(function (GameKind) {
-    GameKind[GameKind["PLAY"] = 0] = "PLAY";
-    GameKind[GameKind["HELP"] = 1] = "HELP";
-})(GameKind || (GameKind = {}));
+var gameParamGameType = queryParams.get("gameType");
+var gameParamGameMode = queryParams.get("gameMode");
+console.log("gameParamGameType: ".concat(gameParamGameType));
+console.log("gameParamGameMode: ".concat(gameParamGameMode));
 var GameState;
 (function (GameState) {
     GameState[GameState["INIT"] = 0] = "INIT";
@@ -32,6 +31,46 @@ var ProbState;
     ProbState[ProbState["CORRECT"] = 4] = "CORRECT";
     ProbState[ProbState["SOLUTION"] = 5] = "SOLUTION";
 })(ProbState || (ProbState = {}));
+// process query parameter gameType
+switch (gameParamGameType) {
+    case GameType[GameType.MIN_COINS]:
+        currentGame = gameCoinsMin;
+        break;
+    case GameType[GameType.FINITE_COINS]:
+        currentGame = gameCoinsFinite;
+        break;
+    case GameType[GameType.MAX_COINS]:
+        currentGame = gameCoinsMax;
+        break;
+}
+// process query parameter gameMode
+switch (gameParamGameMode) {
+    case GameMode[GameMode.PLAY]:
+        currentGameMode = GameMode.PLAY;
+        loadScript("js/game-play.js");
+        break;
+    case GameMode[GameMode.HELP]:
+        currentGameMode = GameMode.HELP;
+        loadScript("js/game-help.js");
+        break;
+}
+// load the final script depending on gameMode.
+function loadScript(src) {
+    var script = document.createElement("script");
+    script.src = src;
+    script.defer = true; // To maintain execution order
+    document.body.appendChild(script);
+}
+// 
+function createImgHand() {
+    var img = document.createElement("img");
+    img.src = "img/hand-index-thumb.png";
+    img.width = 32;
+    img.style.visibility = "hidden";
+    document.body.appendChild(img);
+    return img;
+}
+currentGameType = currentGame.type;
 var probState; // Current state of problem
 var maxQuarters = 0;
 var maxDimes = 0;
@@ -48,19 +87,28 @@ var tryCount = 0;
 var maxValMap = new Map();
 var txtTitle = document.getElementById("txtTitle");
 var txtDescription = document.getElementById("txtDescription");
+var txtDesc1; // must be set after txtDescription value is assigned.
+var txtDesc2; // must be set after txtDescription value is assigned.
 var txtNoOfCoins = document.getElementById("txtNoOfCoins");
 var txtAmount = document.getElementById("txtAmount");
 var txtQ = document.getElementById("txtQ");
 var txtD = document.getElementById("txtD");
 var txtN = document.getElementById("txtN");
 var txtP = document.getElementById("txtP");
+var txtMaxQ = document.getElementById("txtMaxQ");
+var txtMaxD = document.getElementById("txtMaxD");
+var txtMaxN = document.getElementById("txtMaxN");
+var txtMaxP = document.getElementById("txtMaxP");
 var btnLeft = document.getElementById("btnLeft");
 var btnRight = document.getElementById("btnRight");
 var txtProbCount = document.getElementById("txtProbCount");
 var txtFeedback = document.getElementById("txtFeedback");
+var imgHand = createImgHand();
 function setGameInfo() {
     txtTitle.innerHTML = currentGame.title;
+    // must give time for DOM to recognize new spans in description.
     txtDescription.innerHTML = currentGame.description;
+    console.log("txtDesc innerHTML assigned.");
     setFocusQ();
 }
 function setFocusQ() {
@@ -88,6 +136,20 @@ function setMaxValues() {
             ele.setAttribute('aria-valuetext', 'unlimited');
         }
     });
+}
+function clearCoins() {
+    txtQ.value = "0";
+    txtQ.classList.remove('border-danger');
+    txtQ.setAttribute('aria-invalid', 'false');
+    txtD.value = "0";
+    txtD.classList.remove('border-danger');
+    txtD.setAttribute('aria-invalid', 'false');
+    txtN.value = "0";
+    txtN.classList.remove('border-danger');
+    txtN.setAttribute('aria-invalid', 'false');
+    txtP.value = "0";
+    txtP.classList.remove('border-danger');
+    txtP.setAttribute('aria-invalid', 'false');
 }
 function getCoinValues() {
     var coinList = document.querySelectorAll('.coinClass');
@@ -140,6 +202,13 @@ function checkCoinValue(valStr, maxVal) {
         return false;
     }
     return true;
+}
+function setButtons(leftLabel, leftDisabled, rightLabel) {
+    btnLeft.innerText = leftLabel;
+    btnLeft.disabled = leftDisabled;
+    btnRight.innerText = rightLabel;
+    // Right button always enabled.
+    btnRight.disabled = false;
 }
 function setFeedback(mark, message) {
     switch (mark) {

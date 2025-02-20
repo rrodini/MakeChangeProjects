@@ -4,12 +4,30 @@
 */
 var gameCoinsMin = {
     title: "Minimum Coins",
-    description: "You have an <span id='descNumber'>large number</span> of quarters, dimes, nickels, and " +
-        "pennies. Make change for the <span id='descAmount'>amount</span> below using the fewest <span id='descCount'>(minimum)</span>" +
-        " coins.",
+    description: "You have an <span id='txtDesc1' class='inline-block fw-bold'>large number</span> of quarters, dimes, nickels, and\npennies. Make change for the <span id='txtDesc2' class='inline-block fw-bold'>amount</span> below using the fewest (minimum)\ncoins.",
     type: GameType.MIN_COINS,
     probMax: 5,
     tryMax: 3,
+    // These are carefully contrived canned problems used by HELP system
+    exampleProblems: [
+        {
+            problem: { amount: 67, maxCoins: new Coins(3, 9, 19, 99) },
+            userCoins: new Coins(2, 1, 1, 2), // CORRECT
+            solnCoins: new Coins(2, 1, 1, 2)
+        },
+        {
+            problem: { amount: 77, maxCoins: new Coins(3, 9, 19, 99) },
+            userCoins: new Coins(2, 1, 1, 2), // INCORRECT
+            solnCoins: new Coins(3, 0, 0, 2)
+        },
+        {
+            problem: { amount: 67, maxCoins: new Coins(3, 9, 19, 99) },
+            userCoins: new Coins(1, 3, 2, 2), // INCORRECT - 8 coins
+            solnCoins: new Coins(2, 1, 1, 2) // CORRECT   - 6 coins
+        },
+    ],
+    exampleMax: 0,
+    exampleIndex: 0,
     genProblem: function () {
         var minAmount = 40;
         amount = 0;
@@ -33,34 +51,40 @@ var gameCoinsMin = {
         solnCoins = new Coins(q, d, n, p);
         return currentProblem;
     },
-    markProblem: function (userCoins) {
+    markProblem: function (userCoins, terse) {
+        var msg;
         if (userCoins.getValue() === currentProblem.amount) {
             if (userCoins.equals(solnCoins)) {
-                return { mark: ProbMark.CORRECT, feedback: "Correct." };
+                return {
+                    mark: ProbMark.CORRECT,
+                    feedback: FeedbackMsg.getCorrectMsg(terse, currentProblem.amount, solnCoins)
+                };
             }
             else {
-                return { mark: ProbMark.INCORRECT, feedback: "Number of coins not minimum." };
+                return {
+                    mark: ProbMark.INCORRECT,
+                    feedback: FeedbackMsg.getBadMinMsg(terse, currentProblem.amount, solnCoins)
+                };
             }
         }
         else {
-            return { mark: ProbMark.INCORRECT, feedback: "Coins don't sum to Amount." };
+            return {
+                mark: ProbMark.INCORRECT,
+                feedback: FeedbackMsg.getBadSumMsg(terse, currentProblem.amount, userCoins)
+            };
         }
     },
     getSolution: function () {
         return solnCoins;
     },
     // Help functions
-    genExample: function (kind) {
-        // get values from an array of problems in the future.
-        amount = 67;
-        var maxQ = 3;
-        var maxD = 9;
-        var maxN = 19;
-        var maxP = 99;
-        var maxCoins = new Coins(maxQ, maxD, maxN, maxP);
-        var currentProblem = { amount: amount, maxCoins: maxCoins };
-        var exampleCoins = new Coins(2, 1, 1, 2);
-        solnCoins = exampleCoins;
-        return { problem: currentProblem, userCoins: exampleCoins };
+    genExample: function () {
+        // get values from an array of examples.
+        gameCoinsMin.exampleMax = gameCoinsMin.exampleProblems.length;
+        gameCoinsMin.exampleIndex = gameCoinsMin.exampleIndex % gameCoinsMin.exampleMax;
+        var exampleProblem = gameCoinsMin.exampleProblems[gameCoinsMin.exampleIndex];
+        solnCoins = exampleProblem.solnCoins;
+        gameCoinsMin.exampleIndex++;
+        return exampleProblem;
     }
 };

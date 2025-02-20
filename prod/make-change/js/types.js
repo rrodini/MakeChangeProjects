@@ -6,6 +6,11 @@ var GameType;
     GameType[GameType["MAX_COINS"] = 2] = "MAX_COINS";
 })(GameType || (GameType = {}));
 ;
+var GameMode;
+(function (GameMode) {
+    GameMode[GameMode["PLAY"] = 0] = "PLAY";
+    GameMode[GameMode["HELP"] = 1] = "HELP";
+})(GameMode || (GameMode = {}));
 var ProbMark;
 (function (ProbMark) {
     ProbMark[ProbMark["NONE"] = 0] = "NONE";
@@ -15,6 +20,7 @@ var ProbMark;
 // moved to game-common.ts
 // Globals
 // let currentGameType: GameType;
+// let currentGameMode: GameMode;
 // let currentProblem: Problem;
 // let solnCoins: Coins;
 // let currentGame: GameConfig;

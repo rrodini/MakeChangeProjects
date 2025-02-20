@@ -5,12 +5,36 @@
 var maxSolns = [];
 var gameCoinsMax = {
     title: "Make Change - Maximum Coins",
-    description: "You have a <b>limited</b> number of quarters, dimes, nickels, and " +
-        "pennies. Make change for the <b>amount</b> below using the most <b>(maximum)</b>" +
-        " coins. The change must be <b>EXACT</b>. If it can't be done, enter zeros.",
+    description: "You have an <span id='txtDesc1' class='inline-block fw-bold'>limited number</span> of quarters, dimes, nickels, and\npennies. Make change for the <span id='txtDesc2' class='inline-block fw-bold'>amount</span> below using the most (maximum)\ncoins. The change must be EXACT. If it can't be done, enter zeros.",
     type: GameType.MAX_COINS,
     probMax: 5,
     tryMax: 3,
+    // HELP variables below.
+    exampleProblems: [
+        {
+            problem: { amount: 79, maxCoins: new Coins(2, 2, 4, 8) },
+            userCoins: new Coins(2, 1, 3, 4), // CORRECT
+            solnCoins: new Coins(2, 1, 3, 4)
+        },
+        {
+            problem: { amount: 89, maxCoins: new Coins(1, 3, 4, 8) },
+            userCoins: new Coins(0, 0, 0, 0), // CORRECT - No exact solution.
+            solnCoins: new Coins(0, 0, 0, 0)
+        },
+        {
+            problem: { amount: 79, maxCoins: new Coins(2, 2, 4, 8) },
+            userCoins: new Coins(2, 2, 1, 4), // INCORRECT -  9 Coins
+            solnCoins: new Coins(2, 1, 3, 4) // CORRECT   - 10 Coins
+        },
+        {
+            problem: { amount: 79, maxCoins: new Coins(2, 2, 4, 8) },
+            userCoins: new Coins(0, 0, 0, 0), // INCORRECT - There is a solution.
+            solnCoins: new Coins(2, 1, 3, 4)
+        },
+    ],
+    exampleMax: 0,
+    exampleIndex: 0,
+    // FUNCTIONS
     genProblem: function () {
         var minAmount = 60;
         amount = 0;
@@ -24,57 +48,48 @@ var gameCoinsMax = {
         var maxCoins = new Coins(maxQ, maxD, maxN, maxP);
         currentProblem = { amount: amount, maxCoins: maxCoins };
         // Now generate solutions
-        maxSolns = [];
-        for (var amt = 1; amt <= amount; amt++) {
-            var q = void 0;
-            for (q = maxQ; q >= 0; q--) {
-                var d = void 0;
-                for (d = maxD; d >= 0; d--) {
-                    var n = void 0;
-                    for (n = maxN; n >= 0; n--) {
-                        var p = void 0;
-                        for (p = maxP; p >= 0; p--) {
-                            var testCoins = new Coins(q, d, n, p);
-                            if (testCoins.getValue() === amount) {
-                                maxSolns.push(testCoins);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        // now sort allSolns based on # coins
-        maxSolns.sort(function (a, b) {
-            return a.getCount() - b.getCount();
-        });
-        // TEMP
-        //allSolns.forEach(soln => { console.log(soln.toString()) });
+        maxSolns = genSolutions.generate(currentProblem);
         return currentProblem;
     },
-    markProblem: function (userCoins) {
+    markProblem: function (userCoins, terse) {
         var markFeedback = { mark: ProbMark.INCORRECT, feedback: "TBD" };
         if (userCoins.equals(Coins.zeroCoins)) {
             // Is there no solution?
             if (maxSolns.length === 0) {
-                markFeedback = { mark: ProbMark.CORRECT, feedback: "Correct." };
+                markFeedback = {
+                    mark: ProbMark.CORRECT,
+                    feedback: FeedbackMsg.getNoSolnMsg(terse)
+                };
             }
             else {
-                markFeedback = { mark: ProbMark.INCORRECT, feedback: "Yes, there is a solution." };
+                markFeedback = {
+                    mark: ProbMark.INCORRECT,
+                    feedback: FeedbackMsg.getSolnExistsMsg(terse, currentProblem.amount, solnCoins)
+                };
             }
         }
         else {
             // Do the user coins sum to amount?
             if (userCoins.getValue() !== currentProblem.amount) {
-                markFeedback = { mark: ProbMark.INCORRECT, feedback: "Coins don't sum to Amount." };
+                markFeedback = {
+                    mark: ProbMark.INCORRECT, // Coins don't sum to Amount.
+                    feedback: FeedbackMsg.getBadSumMsg(terse, currentProblem.amount, userCoins)
+                };
             }
             else {
                 // Are the user coins maximal?
                 var solnCount = maxSolns[maxSolns.length - 1].getCount();
                 if (solnCount === userCoins.getCount()) {
-                    markFeedback = { mark: ProbMark.CORRECT, feedback: "Correct." };
+                    markFeedback = {
+                        mark: ProbMark.CORRECT,
+                        feedback: FeedbackMsg.getCorrectMsg(terse, currentProblem.amount, solnCoins)
+                    };
                 }
                 else {
-                    markFeedback = { mark: ProbMark.INCORRECT, feedback: "Number of coins not maximum." };
+                    markFeedback = {
+                        mark: ProbMark.INCORRECT,
+                        feedback: FeedbackMsg.getBadMaxMsg(terse, currentProblem.amount, solnCoins)
+                    };
                 }
             }
         }
@@ -87,17 +102,15 @@ var gameCoinsMax = {
         }
         return solnCoins;
     },
-    // Help functions
-    genExample: function (kind) {
-        // get values from an array of problems in the future.
-        amount = 41;
-        var maxQ = 0;
-        var maxD = 0;
-        var maxN = 0;
-        var maxP = 0;
-        var maxCoins = new Coins(maxQ, maxD, maxN, maxP);
-        var currentProblem = { amount: amount, maxCoins: maxCoins };
-        var exampleCoins = new Coins(0, 0, 0, 0);
-        return { problem: currentProblem, userCoins: exampleCoins };
+    // HELP functions
+    genExample: function () {
+        // get values from an array of examples.
+        gameCoinsMax.exampleMax = gameCoinsMax.exampleProblems.length;
+        gameCoinsMax.exampleIndex = gameCoinsMax.exampleIndex % gameCoinsMax.exampleMax;
+        var example = gameCoinsMax.exampleProblems[gameCoinsMax.exampleIndex];
+        solnCoins = example.solnCoins;
+        maxSolns = genSolutions.generate(example.problem);
+        gameCoinsMax.exampleIndex++;
+        return example;
     }
 };

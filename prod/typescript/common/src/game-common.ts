@@ -1,21 +1,22 @@
 /*
- game-common.ts - Everything that is common between game-play and game-help.
+ game-common.ts - Everything that is common between game-play.ts and game-help.ts.
  Types, globals, functions, etc.
  */
 
 // Globals
 let currentGameType: GameType;
+let currentGameMode: GameMode;
 let currentProblem: Problem;
 let solnCoins: Coins;
-let currentGame: GameConfig;
+let currentGame: GameConfig = gameCoinsMin;  // make typescript happy
 
 const queryParams = new URLSearchParams(window.location.search);
-const gameParamGame: string = queryParams.get("game")!;
+const gameParamGameType: string = queryParams.get("gameType")!;
+const gameParamGameMode: string = queryParams.get("gameMode")!;
 
-enum GameKind {
-  PLAY,    // Play a real game
-  HELP,    // Help on game
-}
+console.log(`gameParamGameType: ${gameParamGameType}`);
+console.log(`gameParamGameMode: ${gameParamGameMode}`);
+
 enum GameState {
   INIT,    // Initializing for type of game
   START,   // Game in progress
@@ -31,6 +32,47 @@ enum ProbState {
   CORRECT,   // The solution was correct
   SOLUTION,  // Show the solution
 }
+// process query parameter gameType
+switch (gameParamGameType) {
+  case GameType[GameType.MIN_COINS]:
+    currentGame = gameCoinsMin;
+    break;
+  case GameType[GameType.FINITE_COINS]:
+    currentGame = gameCoinsFinite;
+    break;
+  case GameType[GameType.MAX_COINS]:
+    currentGame = gameCoinsMax;
+    break;
+}
+// process query parameter gameMode
+switch (gameParamGameMode) {
+  case GameMode[GameMode.PLAY]:
+    currentGameMode = GameMode.PLAY;
+    loadScript("js/game-play.js");
+    break;
+  case GameMode[GameMode.HELP]:
+    currentGameMode = GameMode.HELP;
+    loadScript("js/game-help.js");
+    break;
+
+}
+// load the final script depending on gameMode.
+function loadScript(src: string): void {
+  const script = document.createElement("script");
+  script.src = src;
+  script.defer = true; // To maintain execution order
+  document.body.appendChild(script);
+}
+// 
+function createImgHand(): HTMLImageElement {
+  const img = document.createElement<"img">("img");
+  img.src = "img/hand-index-thumb.png";
+  img.width = 32;
+  img.style.visibility = "hidden";
+  document.body.appendChild(img);
+  return img;
+}
+currentGameType = currentGame.type;
 
 let probState: ProbState; // Current state of problem
 
@@ -52,20 +94,29 @@ let maxValMap = new Map();
 
 const txtTitle = document.getElementById("txtTitle") as HTMLInputElement;
 const txtDescription = document.getElementById("txtDescription") as HTMLInputElement;
+var txtDesc1: HTMLElement;  // must be set after txtDescription value is assigned.
+var txtDesc2: HTMLElement;  // must be set after txtDescription value is assigned.
 const txtNoOfCoins = document.getElementById("txtNoOfCoins") as HTMLInputElement;
 const txtAmount = document.getElementById("txtAmount") as HTMLInputElement;
 const txtQ = document.getElementById("txtQ") as HTMLInputElement;
 const txtD = document.getElementById("txtD") as HTMLInputElement;
 const txtN = document.getElementById("txtN") as HTMLInputElement;
 const txtP = document.getElementById("txtP") as HTMLInputElement;
+const txtMaxQ = document.getElementById("txtMaxQ") as HTMLInputElement;
+const txtMaxD = document.getElementById("txtMaxD") as HTMLInputElement;
+const txtMaxN = document.getElementById("txtMaxN") as HTMLInputElement;
+const txtMaxP = document.getElementById("txtMaxP") as HTMLInputElement;
 const btnLeft = document.getElementById("btnLeft") as HTMLButtonElement;
 const btnRight = document.getElementById("btnRight") as HTMLButtonElement;
 const txtProbCount = document.getElementById("txtProbCount") as HTMLInputElement;
 const txtFeedback = document.getElementById("txtFeedback") as HTMLInputElement;
+const imgHand = createImgHand();
 
 function setGameInfo() {
   txtTitle.innerHTML = currentGame.title;
+  // must give time for DOM to recognize new spans in description.
   txtDescription.innerHTML = currentGame.description;
+  console.log("txtDesc innerHTML assigned.")
   setFocusQ();
 }
 
@@ -95,6 +146,21 @@ function setMaxValues() {
       ele.setAttribute('aria-valuetext', 'unlimited');
     }
   })
+}
+
+function clearCoins(): void {
+  txtQ.value = "0";
+  txtQ.classList.remove('border-danger');
+  txtQ.setAttribute('aria-invalid', 'false');
+  txtD.value = "0";
+  txtD.classList.remove('border-danger');
+  txtD.setAttribute('aria-invalid', 'false');
+  txtN.value = "0";
+  txtN.classList.remove('border-danger');
+  txtN.setAttribute('aria-invalid', 'false');
+  txtP.value = "0";
+  txtP.classList.remove('border-danger');
+  txtP.setAttribute('aria-invalid', 'false');
 }
 
 function getCoinValues(): Coins {
@@ -145,6 +211,14 @@ function checkCoinValue(valStr: string, maxVal: number): boolean {
     return false;
   }
   return true;
+}
+
+function setButtons(leftLabel: string, leftDisabled: boolean, rightLabel: string): void {
+  btnLeft.innerText = leftLabel;
+  btnLeft.disabled = leftDisabled;
+  btnRight.innerText = rightLabel;
+  // Right button always enabled.
+  btnRight.disabled = false;
 }
 
 function setFeedback(mark: ProbMark, message: string) {

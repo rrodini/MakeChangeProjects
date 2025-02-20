@@ -3,21 +3,19 @@
  */
 
 // START HERE
-// const queryParams = new URLSearchParams(window.location.search);
-// const gameParamGame: string = queryParams.get("game")!;
 
-switch (gameParamGame) {
-  case GameType[GameType.MIN_COINS]:
-    currentGame = gameCoinsMin;
-    break;
-  case GameType[GameType.FINITE_COINS]:
-    currentGame = gameCoinsFinite;
-    break;
-  case GameType[GameType.MAX_COINS]:
-    currentGame = gameCoinsMax;
-    break;
-}
-currentGameType = currentGame.type;
+// switch (gameParamGameType) {
+//   case GameType[GameType.MIN_COINS]:
+//     currentGame = gameCoinsMin;
+//     break;
+//   case GameType[GameType.FINITE_COINS]:
+//     currentGame = gameCoinsFinite;
+//     break;
+//   case GameType[GameType.MAX_COINS]:
+//     currentGame = gameCoinsMax;
+//     break;
+// }
+// currentGameType = currentGame.type;
 
 // enum GameState {
 //   INIT,    // Initializing for type of game
@@ -176,14 +174,14 @@ function coinValueChange(this: HTMLDataElement, ev: Event): void {
     btnRight.disabled = false;
   }
 }
-
-function setButtons(leftLabel: string, leftDisabled: boolean, rightLabel: string): void {
-  btnLeft.innerText = leftLabel;
-  btnLeft.disabled = leftDisabled;
-  btnRight.innerText = rightLabel;
-  // Right button always enabled.
-  btnRight.disabled = false;
-}
+/* moved to game-common.ts */
+// function setButtons(leftLabel: string, leftDisabled: boolean, rightLabel: string): void {
+//   btnLeft.innerText = leftLabel;
+//   btnLeft.disabled = leftDisabled;
+//   btnRight.innerText = rightLabel;
+//   // Right button always enabled.
+//   btnRight.disabled = false;
+// }
 
 function leftButtonClick(this: HTMLButtonElement, ev: Event): void {
   const text: string = btnLeft.innerText;
@@ -210,27 +208,27 @@ function rightButtonClick(this: HTMLButtonElement, ev: Event): void {
     showProblem()
   } else if (text === 'Game Over') {
     // Transition to score screen here.
-    let params: string = `?game=${gameParamGame}&correct=${correctCount}&total=${probCount}`;
+    let params: string = `?game=${gameParamGameType}&correct=${correctCount}&total=${probCount}`;
     location.href = "score.html" + params;
   } else {
     fatalError(`rightButtonClick: invalid button value: ${text}`);
   }
 }
-
-function clearCoins(): void {
-  txtQ.value = "0";
-  txtQ.classList.remove('border-danger');
-  txtQ.setAttribute('aria-invalid', 'false');
-  txtD.value = "0";
-  txtD.classList.remove('border-danger');
-  txtD.setAttribute('aria-invalid', 'false');
-  txtN.value = "0";
-  txtN.classList.remove('border-danger');
-  txtN.setAttribute('aria-invalid', 'false');
-  txtP.value = "0";
-  txtP.classList.remove('border-danger');
-  txtP.setAttribute('aria-invalid', 'false');
-}
+/* moved to game-common.ts */
+// function clearCoins(): void {
+//   txtQ.value = "0";
+//   txtQ.classList.remove('border-danger');
+//   txtQ.setAttribute('aria-invalid', 'false');
+//   txtD.value = "0";
+//   txtD.classList.remove('border-danger');
+//   txtD.setAttribute('aria-invalid', 'false');
+//   txtN.value = "0";
+//   txtN.classList.remove('border-danger');
+//   txtN.setAttribute('aria-invalid', 'false');
+//   txtP.value = "0";
+//   txtP.classList.remove('border-danger');
+//   txtP.setAttribute('aria-invalid', 'false');
+// }
 
 /* moved to game-common.ts */
 // function getCoinValues(): Coins {
@@ -304,7 +302,7 @@ function markProblem(): void {
   probState = ProbState.MARK;
   logProbState(probState);
   const userCoins: Coins = getCoinValues();
-  const probFeedback: ProbFeedback = currentGame.markProblem(userCoins);
+  const probFeedback: ProbFeedback = currentGame.markProblem(userCoins, true);
   if (probFeedback.mark === ProbMark.CORRECT) {
     probState = ProbState.CORRECT;
     logProbState(probState);
