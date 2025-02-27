@@ -1,3 +1,6 @@
+/*
+ score.ts - Logic for the score page.
+*/
 const scoreParams = new URLSearchParams(window.location.search);
 const scoreParamGame: string = scoreParams.get("game")!;
 const scoreParamCorrect: string = scoreParams.get("correct")!;

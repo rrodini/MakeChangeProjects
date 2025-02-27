@@ -61,7 +61,7 @@ function loadScript(src) {
     script.defer = true; // To maintain execution order
     document.body.appendChild(script);
 }
-// 
+// create the hand image used by game-play.ts
 function createImgHand() {
     var img = document.createElement("img");
     img.src = "img/hand-index-thumb.png";
@@ -104,17 +104,23 @@ var btnRight = document.getElementById("btnRight");
 var txtProbCount = document.getElementById("txtProbCount");
 var txtFeedback = document.getElementById("txtFeedback");
 var imgHand = createImgHand();
+// set the title and the description field.
 function setGameInfo() {
-    txtTitle.innerHTML = currentGame.title;
-    // must give time for DOM to recognize new spans in description.
+    var title = "";
+    if (currentGameMode === GameMode.HELP) {
+        title = "Watch me play<br/>";
+    }
+    title += currentGame.title;
+    txtTitle.innerHTML = title;
     txtDescription.innerHTML = currentGame.description;
-    console.log("txtDesc innerHTML assigned.");
     setFocusQ();
 }
+// put the focus on the quarters input.
 function setFocusQ() {
     txtQ.focus();
     txtQ.select();
 }
+// Log the problem state (used for debugging).
 function logProbState(state) {
     console.log("probState: ".concat(ProbState[state]));
 }
@@ -123,6 +129,7 @@ function showProblem() {
     probState = ProbState.SHOW;
     logProbState(probState);
 }
+// Set the max values fields.
 function setMaxValues() {
     // key is ID for txtMaxQ, txtMaxD, etc.
     maxValMap.forEach(function (val, key) {
@@ -137,6 +144,7 @@ function setMaxValues() {
         }
     });
 }
+// Clear the coins values by setting them to zeros.
 function clearCoins() {
     txtQ.value = "0";
     txtQ.classList.remove('border-danger');
@@ -151,6 +159,7 @@ function clearCoins() {
     txtP.classList.remove('border-danger');
     txtP.setAttribute('aria-invalid', 'false');
 }
+// Get the input coin values as Coins object.
 function getCoinValues() {
     var coinList = document.querySelectorAll('.coinClass');
     var q = 0;
@@ -183,6 +192,7 @@ function getCoinValues() {
     });
     return new Coins(q, d, n, p);
 }
+// Validate an input coin value.
 function checkCoinValue(valStr, maxVal) {
     var valid = false;
     // remove front and rear whitespace.
@@ -203,6 +213,7 @@ function checkCoinValue(valStr, maxVal) {
     }
     return true;
 }
+// Set the left / right buttons according to the state of the problem.
 function setButtons(leftLabel, leftDisabled, rightLabel) {
     btnLeft.innerText = leftLabel;
     btnLeft.disabled = leftDisabled;
@@ -210,6 +221,7 @@ function setButtons(leftLabel, leftDisabled, rightLabel) {
     // Right button always enabled.
     btnRight.disabled = false;
 }
+// Set the feedback area after marking the problem.
 function setFeedback(mark, message) {
     switch (mark) {
         case ProbMark.NONE:

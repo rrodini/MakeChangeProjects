@@ -1,3 +1,6 @@
+/*
+ types.ts - Global types for Make Change.
+*/
 enum GameType { MIN_COINS, FINITE_COINS, MAX_COINS };
 enum GameMode {
   PLAY,    // Play a real game

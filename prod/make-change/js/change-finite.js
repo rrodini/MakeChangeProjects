@@ -4,7 +4,7 @@
 */
 var finiteSolns = [];
 var gameCoinsFinite = {
-    title: "Make Change - Finite Coins",
+    title: "Finite Coins",
     description: "You have a <span id='txtDesc1' class='inline-block fw-bold'>limited number</span> of quarters, dimes, nickels, and\npennies. Make change for the <span id='txtDesc2' class='inline-block fw-bold'>amount</span> below using the\ncoins. The change must be EXACT. If it can't be done, enter zeros.",
     type: GameType.FINITE_COINS,
     probMax: 5,

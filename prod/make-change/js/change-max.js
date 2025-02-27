@@ -4,7 +4,7 @@
 */
 var maxSolns = [];
 var gameCoinsMax = {
-    title: "Make Change - Maximum Coins",
+    title: "Maximum Coins",
     description: "You have an <span id='txtDesc1' class='inline-block fw-bold'>limited number</span> of quarters, dimes, nickels, and\npennies. Make change for the <span id='txtDesc2' class='inline-block fw-bold'>amount</span> below using the most (maximum)\ncoins. The change must be EXACT. If it can't be done, enter zeros.",
     type: GameType.MAX_COINS,
     probMax: 5,
@@ -37,7 +37,7 @@ var gameCoinsMax = {
     // FUNCTIONS
     genProblem: function () {
         var minAmount = 60;
-        amount = 0;
+        var amount = 0;
         while (amount < minAmount) {
             amount = Math.floor(Math.random() * 99) + 1;
         }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0"
+    />
+    <title>Penny</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/mc-basics-col.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- penny equivalences -->
+      <div class="row bg-light border" >
+        <div class="col-12" >
+          <h4 class="text-primary">Penny Equivalences</h4>
+        </div>
+      </div>
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Penny" 
+                  img-url="img/001-cent_37476_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="1"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+      </div>
+      <!-- back -->
+      <div class="row bg-light border" >
+        <div class="col-12 text-center">
+          <div onclick="window.history.back();" class="btn btn-primary m-3" id="btnBack" role="button">Back</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

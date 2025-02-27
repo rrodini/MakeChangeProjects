@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0"
+    />
+    <title>Pick a coin</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/mc-basics-col.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- penny equivalences -->
+      <div class="row bg-light border" >
+        <div class="col-4" >
+          <img src="./img/penny.png" alt="penny" class="img-fluid" />
+        </div>
+        <div class="col-4">
+          <span class="text-primary h5">What is a penny worth?</span>
+        </div>
+        <div class="col-4">
+          <a href="basics-penny.html" class="btn btn-primary m-3" id="btnPenny" role="button">Answer</a>
+        </div>
+      </div>
+      <!-- nickel equivalences -->
+      <div class="row bg-light border" >
+        <div class="col-4" >
+          <img src="./img/nickel.png" alt="nickel" class="img-fluid" />
+        </div>
+        <div class="col-4" >
+            <span class="text-primary h5">What is a nickel worth?</span>
+        </div>
+        <div class="col-4">
+          <a href="basics-nickel.html" class="btn btn-primary m-3" id="btnNickel" role="button">Answer</a>
+        </div>
+      </div>
+      <!-- dime equivalences -->
+      <div class="row bg-light border" >
+        <div class="col-4">
+          <img src="./img/dime.png" alt="dime" class="img-fluid" />
+        </div>
+        <div class="col-4">
+          <span class="text-primary h3">What is a dime worth?</span>
+        </div>
+        <div class="col-4">
+          <a href="basics-dime.html" class="btn btn-primary m-3" id="btnDime" role="button">Answer</a>
+        </div>
+      </div>
+      <!-- quarter equivalences -->
+      <div class="row bg-light border" >
+        <div class="col-4" >
+          <img src="./img/quarter.png" alt="quarter" class="img-fluid" />
+        </div>
+        <div class="col-4" >
+          <span class="text-primary h3">What is a quarter worth?</span>
+        </div>
+        <div class="col-4">
+          <a href="basics-quarter.html" class="btn btn-primary m-3" id="btnQuarter" role="button">Answer</a>
+        </div>
+      </div>
+      <!-- back -->
+      <div class="row bg-light border" >
+        <div class="col-12 text-center">
+          <div onclick="window.history.back()" class="btn btn-primary m-3" id="btnBack" role="button">Back</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

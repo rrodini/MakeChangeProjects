@@ -47,27 +47,12 @@ txtP.readOnly = true;
 btnRight.addEventListener("click", checkButtonClick);
 setGameInfo(); // set the innerHtml of txtDescription
 txtDesc1 = document.getElementById("txtDesc1");
-console.log("txtDesc1 reference assigned.");
-txtDesc1.style.willChange = "auto";
 txtDesc2 = document.getElementById("txtDesc2");
-txtDesc2.style.willChange = "auto";
 var userCoins; // set in nextExample()
 var animateDuration1 = 1000; // Most animations are 1 second
 var animateDuration2 = 2000; // But some are 2 seconds
 nextExample(); // starts animations
-function doAnimations() {
-    // Now simulate a game thru animation.
-    Promise.all(animation1()).then(function () {
-        return Promise.all(animation2()).then(function () {
-            return animationCoinsEntry().then(function () {
-                return animateCheckClick().then(function () {
-                    checkButtonClick(); // => markExample
-                });
-            });
-        });
-    });
-}
-// Get a new example.
+// Get a new example and do animations.
 function nextExample() {
     probState = ProbState.NEXT;
     logProbState(probState);
@@ -87,17 +72,12 @@ function nextExample() {
     txtProbCount.innerHTML = "".concat(probCount, " of ").concat(currentGame.exampleMax);
     setFeedback(ProbMark.NONE, "");
     clearCoins();
-    setButtons('Clear', false, 'Check');
+    setButtons('Clear', true, 'Check');
     btnRight.blur();
     showProblem();
     doAnimations();
 }
-// function setCoinValues(coins: Coins) {
-//   txtQ.value = coins.getQ().toString();
-//   txtD.value = coins.getD().toString();
-//   txtN.value = coins.getN().toString();
-//   txtP.value = coins.getP().toString();
-// }
+// Check the result of canned example problem.
 function checkButtonClick() {
     var text = btnRight.innerText;
     if (text === 'Check') {
@@ -118,7 +98,7 @@ function checkButtonClick() {
         fatalError("rightButtonClick: invalid button value: ".concat(text));
     }
 }
-// simplified version of markProblem (see game-play.ts)
+// Simplified version of markProblem (see game-play.ts)
 function markExample() {
     probState = ProbState.MARK;
     logProbState(probState);
@@ -178,13 +158,22 @@ function animateTextFields(eles) {
     return animated;
 }
 /*
+ animation0 - animate the first part of the instructions.
+ WATCH ME PLAY...
+ Return:
+ Promise array.
+*/
+function animation0() {
+    return animateTextFields([txtTitle]);
+}
+/*
  animation1 - animate the first part of the instructions.
  You have a LARGE NUMBER of...
  Return:
  Promise array.
 */
 function animation1() {
-    console.log("txtDesc1 reference animated");
+    //  console.log("txtDesc1 reference animated");
     return animateTextFields([txtDesc1, txtNoOfCoins, txtMaxQ, txtMaxD, txtMaxN, txtMaxP]);
 }
 /*
@@ -293,7 +282,7 @@ function animationCoinsEntry() {
                                 case 0:
                                     val = coinsArray[index++];
                                     return [4 /*yield*/, animateHandDisplay(txtCoin).then(function () {
-                                            return animateCoinEntry(txtCoin, val).then(function () { console.log("animation coin over"); });
+                                            return animateCoinEntry(txtCoin, val).then(function () { });
                                         })];
                                 case 1:
                                     _b.sent();
@@ -343,6 +332,24 @@ function animateCheckClick() {
                             resolve(true);
                         })];
             }
+        });
+    });
+}
+/*
+ doAnimiations - Do the entire animation sequence using
+ promises to sequence through them.
+*/
+function doAnimations() {
+    // Now simulate a game thru animation.
+    Promise.all(animation0()).then(function () {
+        return Promise.all(animation1()).then(function () {
+            return Promise.all(animation2()).then(function () {
+                return animationCoinsEntry().then(function () {
+                    return animateCheckClick().then(function () {
+                        checkButtonClick(); // => markExample
+                    });
+                });
+            });
         });
     });
 }

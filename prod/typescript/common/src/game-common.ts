@@ -63,7 +63,7 @@ function loadScript(src: string): void {
   script.defer = true; // To maintain execution order
   document.body.appendChild(script);
 }
-// 
+// create the hand image used by game-play.ts
 function createImgHand(): HTMLImageElement {
   const img = document.createElement<"img">("img");
   img.src = "img/hand-index-thumb.png";
@@ -111,20 +111,23 @@ const btnRight = document.getElementById("btnRight") as HTMLButtonElement;
 const txtProbCount = document.getElementById("txtProbCount") as HTMLInputElement;
 const txtFeedback = document.getElementById("txtFeedback") as HTMLInputElement;
 const imgHand = createImgHand();
-
+// set the title and the description field.
 function setGameInfo() {
-  txtTitle.innerHTML = currentGame.title;
-  // must give time for DOM to recognize new spans in description.
+  var title: string = "";
+  if (currentGameMode === GameMode.HELP) {
+    title = "Watch me play<br/>"
+  }
+  title += currentGame.title;
+  txtTitle.innerHTML = title;
   txtDescription.innerHTML = currentGame.description;
-  console.log("txtDesc innerHTML assigned.")
   setFocusQ();
 }
-
+// put the focus on the quarters input.
 function setFocusQ(): void {
   txtQ.focus();
   txtQ.select();
 }
-
+// Log the problem state (used for debugging).
 function logProbState(state: ProbState): void {
   console.log(`probState: ${ProbState[state]}`);
 }
@@ -133,7 +136,7 @@ function showProblem() {
   probState = ProbState.SHOW;
   logProbState(probState);
 }
-
+// Set the max values fields.
 function setMaxValues() {
   // key is ID for txtMaxQ, txtMaxD, etc.
   maxValMap.forEach((val, key) => {
@@ -147,7 +150,7 @@ function setMaxValues() {
     }
   })
 }
-
+// Clear the coins values by setting them to zeros.
 function clearCoins(): void {
   txtQ.value = "0";
   txtQ.classList.remove('border-danger');
@@ -162,7 +165,7 @@ function clearCoins(): void {
   txtP.classList.remove('border-danger');
   txtP.setAttribute('aria-invalid', 'false');
 }
-
+// Get the input coin values as Coins object.
 function getCoinValues(): Coins {
   const coinList = document.querySelectorAll('.coinClass') as NodeList;
   let q = 0;
@@ -191,7 +194,7 @@ function getCoinValues(): Coins {
   });
   return new Coins(q, d, n, p);
 }
-
+// Validate an input coin value.
 function checkCoinValue(valStr: string, maxVal: number): boolean {
   let valid = false;
   // remove front and rear whitespace.
@@ -212,7 +215,7 @@ function checkCoinValue(valStr: string, maxVal: number): boolean {
   }
   return true;
 }
-
+// Set the left / right buttons according to the state of the problem.
 function setButtons(leftLabel: string, leftDisabled: boolean, rightLabel: string): void {
   btnLeft.innerText = leftLabel;
   btnLeft.disabled = leftDisabled;
@@ -220,7 +223,7 @@ function setButtons(leftLabel: string, leftDisabled: boolean, rightLabel: string
   // Right button always enabled.
   btnRight.disabled = false;
 }
-
+// Set the feedback area after marking the problem.
 function setFeedback(mark: ProbMark, message: string) {
   switch (mark) {
     case ProbMark.NONE:

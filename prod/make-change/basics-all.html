@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0"
+    />
+    <title>All Coins</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/mc-basics-col.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- penny equivalences -->
+      <div class="row bg-light border" >
+        <div class="col-12" >
+          <h4 class="text-primary">Penny Equivalences</h4>
+        </div>
+      </div>
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Penny" 
+                  img-url="img/001-cent_37476_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="1"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+      </div>
+      <!-- nickel equivalences -->
+      <div class="row bg-light border" >
+        <div class="col-12" >
+          <h4 class="text-primary">Nickel Equivalences</h4>
+        </div>
+      </div>
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Nickel" 
+                  img-url="img/005-cent_37480_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="5"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+      </div>
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Nickel" 
+                  img-url="img/005-cent_37480_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (5)" 
+                  img-url="img/penstack-05_37680_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="5"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+      </div>
+      <!-- dime equivalences -->
+      <div class="row bg-light border" >
+        <div class="col-12" >
+          <h4 class="text-primary">Dime Equivalences</h4>
+        </div>
+      </div>
+      <!-- 1 Dime -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Dime" 
+                  img-url="img/010-cent_37485_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="10"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+        <!-- empty -->
+      </div>
+      <!-- 2 Nickels -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Dime" 
+                  img-url="img/010-cent_37485_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Nickels (2)" 
+                  img-url="img/nickstack-02_37667_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="10"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+        <!-- empty -->
+      </div>
+      <!-- 1 Nickel, 5 Pennies -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Dime" 
+                  img-url="img/010-cent_37485_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Nickel (1)" 
+                  img-url="img/005-cent_37480_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 2 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (5)" 
+                  img-url="img/penstack-05_37680_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="10"></mc-basics-col>
+        <!-- empty -->
+        <!-- <mc-basics-col col-type="empty"></mc-basics-col> -->
+      </div>
+      <!-- 10 Pennies -->
+      <div class="row bg-light border">
+       <!-- addend 0 -->
+       <mc-basics-col col-type="addend" 
+                 img-caption="Dime" 
+                 img-url="img/010-cent_37485_sm.gif" 
+                 col-op="="></mc-basics-col>
+       <!-- addend 1 -->
+       <mc-basics-col col-type="addend" 
+                 img-caption="Pennies (10)" 
+                 img-url="img/penstack-10_37685_sm.gif" 
+                 col-op="="></mc-basics-col>
+       <!-- sum -->
+       <mc-basics-col col-type="sum" col-sum="10"></mc-basics-col>
+       <!-- empty -->
+       <mc-basics-col col-type="empty"></mc-basics-col>
+      </div>
+      <!-- quarter equivalences -->
+      <div class="row bg-light border" >
+        <div class="col-12" >
+          <h4 class="text-primary">Quarter Equivalences</h4>
+        </div>
+      </div>
+      <!-- 1 Quarter -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Quarter" 
+                  img-url="img/025-cent_37500_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="25"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+      </div>
+      <!-- 2 Dimes, 1 Nickel -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Quarter" 
+                  img-url="img/025-cent_37500_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Dimes (2)" 
+                  img-url="img/dimestack-02_37637_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 2 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Nickels (1)" 
+                  img-url="img/005-cent_37480_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="25"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+      </div>
+      <!-- 1 Dime, 3 Nickels -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Quarter" 
+                  img-url="img/025-cent_37500_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Dime (1)" 
+                  img-url="img/010-cent_37485_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 2 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Nickels (3)" 
+                  img-url="img/nickstack-03_37668_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="25"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+      </div>
+      <!-- 5 Nickels -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Quarter" 
+                  img-url="img/025-cent_37500_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Nickels (5)" 
+                  img-url="img/nickstack-05_37670_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="25"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+        <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+      </div>
+      <!-- 2 Dimes 5 Pennies -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Quarter" 
+                  img-url="img/025-cent_37500_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Dimes (2)" 
+                  img-url="img/dimestack-02_37637_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 2 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (5)" 
+                  img-url="img/penstack-05_37680_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="25"></mc-basics-col>
+       <!-- empty -->
+        <mc-basics-col col-type="empty"></mc-basics-col>
+      </div>
+      <!-- 1 Dime, 2 Nickels, 5 Pennies -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Quarter" 
+                  img-url="img/025-cent_37500_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Dime (1)" 
+                  img-url="img/010-cent_37485_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 2 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Nickels (2)" 
+                  img-url="img/nickstack-02_37667_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 3 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (5)" 
+                  img-url="img/penstack-05_37680_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="25"></mc-basics-col>
+      </div>
+      <!-- 4 Nickels, 5 Pennies -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Quarter" 
+                  img-url="img/025-cent_37500_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Nickels (4)" 
+                  img-url="img/nickstack-04_37669_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 2 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (5)" 
+                  img-url="img/penstack-05_37680_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="25"></mc-basics-col>
+       <!-- empty -->
+       <mc-basics-col col-type="empty"></mc-basics-col>
+      </div>
+      <!-- 1 Dime, 1 Nickel, 10 Pennies -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Quarter" 
+                  img-url="img/025-cent_37500_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Dime (1)" 
+                  img-url="img/010-cent_37485_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 2 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Nickel (1)" 
+                  img-url="img/005-cent_37480_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 3 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (10)" 
+                  img-url="img/penstack-10_37685_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="25"></mc-basics-col>
+      </div>
+      <!-- 3 Nickels, 10 Pennies -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Quarter" 
+                  img-url="img/025-cent_37500_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Nickels (3)" 
+                  img-url="img/nickstack-03_37668_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 2 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (10)" 
+                  img-url="img/penstack-10_37685_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="25"></mc-basics-col>
+       <!-- empty -->
+       <mc-basics-col col-type="empty"></mc-basics-col>
+      </div>
+      <!-- 1 Dime, 5 Pennies, 10 Pennies -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Quarter" 
+                  img-url="img/025-cent_37500_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Dime (1)" 
+                  img-url="img/010-cent_37485_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 2 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (5)" 
+                  img-url="img/penstack-05_37680_sm.gif" 
+                  col-op="+"></mc-basics-col>
+         <!-- addend 3 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (10)" 
+                  img-url="img/penstack-10_37685_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="25"></mc-basics-col>
+     </div>
+      <!-- 2 Nickels, 5 Pennies, 10 Pennies -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Quarter" 
+                  img-url="img/025-cent_37500_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Nickels (2)" 
+                  img-url="img/nickstack-02_37667_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 2 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (5)" 
+                  img-url="img/penstack-05_37680_sm.gif" 
+                  col-op="+"></mc-basics-col>
+         <!-- addend 3 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (10)" 
+                  img-url="img/penstack-10_37685_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="25"></mc-basics-col>
+     </div>
+      <!-- 1 Nickel, 10 Pennies, 10 Pennies -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Quarter" 
+                  img-url="img/025-cent_37500_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Nickel (1)" 
+                  img-url="img/005-cent_37480_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 2 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (10)" 
+                  img-url="img/penstack-10_37685_sm.gif" 
+                  col-op="+"></mc-basics-col>
+          <!-- addend 3 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (10)" 
+                  img-url="img/penstack-10_37685_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="25"></mc-basics-col>
+     </div>
+      <!-- 10 Pennies, 10 Pennies, 5 Pennies -->
+      <div class="row bg-light border">
+        <!-- addend 0 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Quarter" 
+                  img-url="img/025-cent_37500_sm.gif" 
+                  col-op="="></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (5)" 
+                  img-url="img/penstack-05_37680_sm.gif" 
+                  col-op="+"></mc-basics-col>
+          <!-- addend 2 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (10)" 
+                  img-url="img/penstack-10_37685_sm.gif" 
+                  col-op="+"></mc-basics-col>
+        <!-- addend 1 -->
+        <mc-basics-col col-type="addend" 
+                  img-caption="Pennies (10)" 
+                  img-url="img/penstack-10_37685_sm.gif" 
+                  col-op="="></mc-basics-col>
+       <!-- sum -->
+        <mc-basics-col col-type="sum" col-sum="25"></mc-basics-col>
+     </div>
+    </div>
+  </body>
+</html>

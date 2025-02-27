@@ -5,7 +5,7 @@
 let maxSolns: Coins[] = []
 
 const gameCoinsMax: GameConfig = {
-  title: "Make Change - Maximum Coins",
+  title: "Maximum Coins",
   description: `You have an <span id='txtDesc1' class='inline-block fw-bold'>limited number</span> of quarters, dimes, nickels, and
 pennies. Make change for the <span id='txtDesc2' class='inline-block fw-bold'>amount</span> below using the most (maximum)
 coins. The change must be EXACT. If it can't be done, enter zeros.`,
@@ -39,8 +39,8 @@ coins. The change must be EXACT. If it can't be done, enter zeros.`,
   exampleIndex: 0,
   // FUNCTIONS
   genProblem: function (): Problem {
-    const minAmount = 60;
-    amount = 0;
+    const minAmount: number = 60;
+    let amount: number = 0;
     while (amount < minAmount) {
       amount = Math.floor(Math.random() * 99) + 1;
     }

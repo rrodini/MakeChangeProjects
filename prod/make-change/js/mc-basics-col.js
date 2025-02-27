@@ -1,10 +1,12 @@
 // Make a cell (1 or 2 column) for the basics help page.
+// Intended us is within div/row within div/container using bootstrap 5.
 class McBasicsCol extends HTMLElement {
 
   constructor() {
     super();  // required call
   }
   connectedCallback() {
+    // two columns
     const emptyHtmlContent = `
        <div class="col ">
         <div class="text-center">
@@ -23,15 +25,16 @@ class McBasicsCol extends HTMLElement {
     const imgCaption = this.getAttribute("img-caption");
     const imgUrl = this.getAttribute("img-url");
     const colOp = this.getAttribute("col-op");
+    // one column
     const sumHtmlContent = `
       <div class="col ">
         <p class="mt-2 py-2"></p>
         <div class="d-flex justify-content-evenly">
-          <h4>${colSum} &cent;</h4>
+          <h4>${colSum}&cent;</h4>
         </div>
       </div>
     `;
-
+    // two columns
     const addendHtmlContent = `
        <div class="col ">
         <div class="text-center">

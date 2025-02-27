@@ -30,7 +30,7 @@ var gameCoinsMin = {
     exampleIndex: 0,
     genProblem: function () {
         var minAmount = 40;
-        amount = 0;
+        var amount = 0;
         while (amount < minAmount) {
             amount = Math.floor(Math.random() * 99) + 1;
         }
@@ -39,9 +39,9 @@ var gameCoinsMin = {
         var maxN = 19;
         var maxP = 99;
         var maxCoins = new Coins(maxQ, maxD, maxN, maxP);
-        var currentProblem = { amount: amount, maxCoins: maxCoins };
+        var localAmount = amount;
+        currentProblem = { amount: localAmount, maxCoins: maxCoins };
         // might as well solve it.
-        var localAmount = currentProblem.amount;
         var q = Math.floor(localAmount / 25);
         localAmount = Math.floor(localAmount % 25);
         var d = Math.floor(localAmount / 10);

@@ -30,8 +30,8 @@ coins.`,
   exampleMax: 0,
   exampleIndex: 0,
   genProblem: function (): Problem {
-    const minAmount = 40;
-    amount = 0;
+    const minAmount: number = 40;
+    let amount: number = 0;
     while (amount < minAmount) {
       amount = Math.floor(Math.random() * 99) + 1;
     }
@@ -40,8 +40,9 @@ coins.`,
     const maxN = 19;
     const maxP = 99;
     const maxCoins = new Coins(maxQ, maxD, maxN, maxP);
+    let localAmount: number = amount;
+    currentProblem = { amount: localAmount, maxCoins: maxCoins };
     // might as well solve it.
-    let localAmount = currentProblem.amount;
     const q = Math.floor(localAmount / 25);
     localAmount = Math.floor(localAmount % 25);
     const d = Math.floor(localAmount / 10);
