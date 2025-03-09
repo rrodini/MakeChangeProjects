@@ -216,12 +216,13 @@ function checkCoinValue(valStr: string, maxVal: number): boolean {
   return true;
 }
 // Set the left / right buttons according to the state of the problem.
-function setButtons(leftLabel: string, leftDisabled: boolean, rightLabel: string): void {
+function setButtons(leftLabel: string, leftDisabled: boolean,
+  rightLabel: string, rightDisabled: boolean): void {
   btnLeft.innerText = leftLabel;
   btnLeft.disabled = leftDisabled;
   btnRight.innerText = rightLabel;
-  // Right button always enabled.
-  btnRight.disabled = false;
+  // Right button disabled only in HELP mode.
+  btnRight.disabled = rightDisabled;
 }
 // Set the feedback area after marking the problem.
 function setFeedback(mark: ProbMark, message: string) {

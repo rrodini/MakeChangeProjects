@@ -1,4 +1,7 @@
 "use strict";
+/*
+ score.ts - Logic for the score page.
+*/
 var scoreParams = new URLSearchParams(window.location.search);
 var scoreParamGame = scoreParams.get("game");
 var scoreParamCorrect = scoreParams.get("correct");

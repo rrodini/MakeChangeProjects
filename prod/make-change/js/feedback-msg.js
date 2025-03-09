@@ -24,7 +24,7 @@ var FeedbackMsg = /** @class */ (function () {
     };
     // Incorrect since coins don't sum to amount message.
     FeedbackMsg.getBadSumMsg = function (terse, amount, userCoins) {
-        var msg = "Coins don't sum to ammount. ";
+        var msg = "Coins don't sum to amount. ";
         if (!terse) {
             msg += "".concat(amount, " &ne; ").concat(userCoins.getValueString(), ".");
         }
@@ -40,7 +40,7 @@ var FeedbackMsg = /** @class */ (function () {
     };
     // Incorrect since user coins not minimum message.
     FeedbackMsg.getBadMinMsg = function (terse, amount, solnCoins) {
-        var msg = "Number of coins not minimum. ";
+        var msg = "Number of coins is not minimum. ";
         if (!terse) {
             msg += "".concat(amount, " = ").concat(solnCoins.getValueString(), " (").concat(solnCoins.getCount(), " coins).");
         }
@@ -48,7 +48,7 @@ var FeedbackMsg = /** @class */ (function () {
     };
     // Incorrect since user coins not maximum message.
     FeedbackMsg.getBadMaxMsg = function (terse, amount, solnCoins) {
-        var msg = "Number of coins not maximum. ";
+        var msg = "Number of coins is not maximum. ";
         if (!terse) {
             msg += "".concat(amount, " = ").concat(solnCoins.getValueString(), " (").concat(solnCoins.getCount(), " coins).");
         }

@@ -39,8 +39,10 @@ function nextExample() {
   txtProbCount.innerHTML = `${probCount} of ${currentGame.exampleMax}`
   setFeedback(ProbMark.NONE, "");
   clearCoins();
-  setButtons('Clear', true, 'Check');
-  btnRight.blur();
+  setButtons('Clear', true, 'Check', true);
+  //  btnRight.blur();
+  // disable the "Check" button from user click.
+  // btnRight.disabled = true;
   showProblem();
   doAnimations();
 }
@@ -52,10 +54,7 @@ function checkButtonClick(): void {
     markExample();
   } else if (text === 'Next') {
     nextExample()
-    // } else if (text === 'Retry') {
-    //   setButtons('Clear', false, 'Check');
-    //   setFeedback(ProbMark.NONE, "");
-    //   showProblem()
+    // no retries in HELP mode.
   } else if (text === 'Help Over') {
     // Transition to home screen here.
     location.href = "index.html";
@@ -77,10 +76,10 @@ function markExample(): void {
     setFeedback(ProbMark.CORRECT, probFeedback.feedback);
     if (testExampleCount()) {
       // Help not done.
-      setButtons('Clear', true, 'Next');
+      setButtons('Clear', true, 'Next', false);
     } else {
       // Help is over.
-      setButtons('Clear', true, 'Help Over');
+      setButtons('Clear', true, 'Help Over', false);
     }
   } else {
     // INCORRECT
@@ -90,9 +89,9 @@ function markExample(): void {
     setFeedback(ProbMark.INCORRECT, feedback);
     // No user retries - move to the next example
     if (testExampleCount()) {
-      setButtons('Clear', true, 'Next');
+      setButtons('Clear', true, 'Next', false);
     } else {
-      setButtons('Clear', true, 'Help Over');
+      setButtons('Clear', true, 'Help Over', false);
     }
   }
 }

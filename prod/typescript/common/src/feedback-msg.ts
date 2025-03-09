@@ -21,7 +21,7 @@ class FeedbackMsg {
   }
   // Incorrect since coins don't sum to amount message.
   public static getBadSumMsg(terse: boolean, amount: number, userCoins: Coins): string {
-    var msg: string = "Coins don't sum to ammount. ";
+    var msg: string = "Coins don't sum to amount. ";
     if (!terse) {
       msg += `${amount} &ne; ${userCoins.getValueString()}.`;
     }
@@ -37,7 +37,7 @@ class FeedbackMsg {
   }
   // Incorrect since user coins not minimum message.
   public static getBadMinMsg(terse: boolean, amount: number, solnCoins: Coins): string {
-    var msg: string = "Number of coins not minimum. ";
+    var msg: string = "Number of coins is not minimum. ";
     if (!terse) {
       msg += `${amount} = ${solnCoins.getValueString()} (${solnCoins.getCount()} coins).`;
     }
@@ -45,7 +45,7 @@ class FeedbackMsg {
   }
   // Incorrect since user coins not maximum message.
   public static getBadMaxMsg(terse: boolean, amount: number, solnCoins: Coins): string {
-    var msg: string = "Number of coins not maximum. ";
+    var msg: string = "Number of coins is not maximum. ";
     if (!terse) {
       msg += `${amount} = ${solnCoins.getValueString()} (${solnCoins.getCount()} coins).`;
     }

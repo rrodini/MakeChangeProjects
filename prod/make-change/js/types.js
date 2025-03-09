@@ -1,4 +1,7 @@
 "use strict";
+/*
+ types.ts - Global types for Make Change.
+*/
 var GameType;
 (function (GameType) {
     GameType[GameType["MIN_COINS"] = 0] = "MIN_COINS";

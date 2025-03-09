@@ -69,7 +69,7 @@ function rightButtonClick(this: HTMLButtonElement, ev: Event): void {
   } else if (text === 'Next') {
     nextProblem()
   } else if (text === 'Retry') {
-    setButtons('Clear', false, 'Check');
+    setButtons('Clear', false, 'Check', false);
     setFeedback(ProbMark.NONE, "");
     showProblem()
   } else if (text === 'Game Over') {
@@ -98,12 +98,12 @@ function nextProblem() {
   setFeedback(ProbMark.NONE, "");
   clearCoins();
   setFocusQ();
-  setButtons('Clear', false, 'Check');
+  setButtons('Clear', false, 'Check', false);
   showProblem();
 }
 // Give user chance to retry the same problem.
 function retryProblem() {
-  setButtons('Solution', false, 'Retry');
+  setButtons('Solution', false, 'Retry', false);
   setFocusQ();
   tryCount++;
   showProblem();
@@ -122,10 +122,10 @@ function markProblem(): void {
     setFeedback(ProbMark.CORRECT, probFeedback.feedback);
     if (testProblemCount()) {
       // Game not done.
-      setButtons('Clear', true, 'Next');
+      setButtons('Clear', true, 'Next', false);
     } else {
       // Game is over.
-      setButtons('Clear', true, 'Game Over');
+      setButtons('Clear', true, 'Game Over', false);
     }
   } else {
     // INCORRECT
@@ -139,11 +139,11 @@ function markProblem(): void {
     } else {
       //  Too many retries. Force user to click "Next".
       setFeedback(ProbMark.INCORRECT, getSolutionString() + ". Sorry, got to move on.");
-      setButtons('Clear', true, 'Next');
+      setButtons('Clear', true, 'Next', false);
       if (testProblemCount()) {
-        setButtons('Clear', true, 'Next');
+        setButtons('Clear', true, 'Next', false);
       } else {
-        setButtons('Clear', true, 'Game Over');
+        setButtons('Clear', true, 'Game Over', false);
       }
     }
   }
@@ -161,9 +161,9 @@ function showSolution() {
   setFeedback(ProbMark.INCORRECT, getSolutionString());
   // User forced to click 'Next' or maybe 'Game Over'
   if (testProblemCount()) {
-    setButtons('Clear', true, 'Next');
+    setButtons('Clear', true, 'Next', false);
   } else {
-    setButtons('Clear', true, 'Game Over');
+    setButtons('Clear', true, 'Game Over', false);
   }
 }
 // Game over if user reached problem count.

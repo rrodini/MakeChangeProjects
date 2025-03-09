@@ -1,6 +1,6 @@
 "use strict";
 /*
-  game-help.ts - game help logic.
+  game-help.ts - game help logic. Animations here.
  */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -72,8 +72,10 @@ function nextExample() {
     txtProbCount.innerHTML = "".concat(probCount, " of ").concat(currentGame.exampleMax);
     setFeedback(ProbMark.NONE, "");
     clearCoins();
-    setButtons('Clear', true, 'Check');
-    btnRight.blur();
+    setButtons('Clear', true, 'Check', true);
+    //  btnRight.blur();
+    // disable the "Check" button from user click.
+    // btnRight.disabled = true;
     showProblem();
     doAnimations();
 }
@@ -85,10 +87,7 @@ function checkButtonClick() {
     }
     else if (text === 'Next') {
         nextExample();
-        // } else if (text === 'Retry') {
-        //   setButtons('Clear', false, 'Check');
-        //   setFeedback(ProbMark.NONE, "");
-        //   showProblem()
+        // no retries in HELP mode.
     }
     else if (text === 'Help Over') {
         // Transition to home screen here.
@@ -112,11 +111,11 @@ function markExample() {
         setFeedback(ProbMark.CORRECT, probFeedback.feedback);
         if (testExampleCount()) {
             // Help not done.
-            setButtons('Clear', true, 'Next');
+            setButtons('Clear', true, 'Next', false);
         }
         else {
             // Help is over.
-            setButtons('Clear', true, 'Help Over');
+            setButtons('Clear', true, 'Help Over', false);
         }
     }
     else {
@@ -127,10 +126,10 @@ function markExample() {
         setFeedback(ProbMark.INCORRECT, feedback);
         // No user retries - move to the next example
         if (testExampleCount()) {
-            setButtons('Clear', true, 'Next');
+            setButtons('Clear', true, 'Next', false);
         }
         else {
-            setButtons('Clear', true, 'Help Over');
+            setButtons('Clear', true, 'Help Over', false);
         }
     }
 }

@@ -19,7 +19,7 @@
             id="txtScoreTitle"
             role="heading" 
           ></p>
-          <img src="./img/coins.jpg" alt="assortment of U.S. coins" class="img-fluid w-100" />
+          <img src="./img/coins.jpg" id="imgChange" alt="assortment of U.S. coins" class="img-fluid w-100" />
         </div>
       </div>
       <div class="row">
@@ -45,4 +45,31 @@
   </body>
   <script type="text/javascript" src="js/types.js"></script>
   <script type="text/javascript" src="js/score.js"></script>
+  <script type="text/javascript" src="js/confetti.min.js"></script>
+  <script>
+  // Retrofit of the confetti effect here (no typescript used).
+  function clickElement(eleId) {
+    var ele = document.getElementById(eleId);
+    // Generate the click at center of element.
+    var rect = ele.getBoundingClientRect();
+    var x = ele.x;
+    var y = ele.y;
+    x = x + ((rect.right - rect.left) / 2);
+    y = y + ((rect.bottom - rect.top) / 2);
+    var clickEvent = new MouseEvent("click", {
+      "clientX": x,
+      "clientY": y
+    })
+    ele.dispatchEvent(clickEvent);
+  }
+  // Confetti is only for perfect score.
+  if (txtScoreFeedback.innerHTML.startsWith("Perfect!")) {
+    var confetti = new Confetti("imgChange");
+    confetti.setCount(100);
+    confetti.destroyTarget(false);
+    confetti.draw();
+    // setTimeout is critical to confetti effect. Do not change.
+    setTimeout(function () {clickElement("imgChange");});
+  };
+ </script>
 </html>
